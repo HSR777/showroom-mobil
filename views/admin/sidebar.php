@@ -6,7 +6,7 @@
     <!-- Groub 01 -->
     <div class="mx-0 my-2 text-center">
         <a href="dashboard.php" style="text-decoration: none;">
-            <h5 class="p-2" style="color : #D4AF37">Nordique Autohaus</h5>
+            <h3 class="p-2 fw-bold" style="color: #D4AF37; font-family: 'Cinzel', serif;">Nordique Autohaus</h3>
         </a>
         <hr>
     </div>
