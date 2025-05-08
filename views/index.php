@@ -88,8 +88,8 @@
     <!-- Navbar End -->
 
     <!-- Hero Section Start -->
-    <div class="container-fluid p-0" style="height: 100vh; background: url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2115&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
-        <div class="d-flex align-items-center justify-content-center h-100">
+    <div class="container-fluid p-0" style="height: 100vh; background: url('../img/image.png') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
+    <div class="d-flex align-items-center justify-content-center h-100">
             <div class="text-position-absolute top-5 start-70 translate-middle text-white" style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
                 <h1 style="font-family: Poppins; font-size: 2rem;">Welcome to Nordique Autohaus</h1>
                 <p style="font-size: 1.5rem;">Temukan Mobil Impian Anda</p>
