@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../statics/css/admin/content-wrapper.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.css">
 </head>
 
 <body>
@@ -24,7 +24,9 @@
                 <!-- Row Card Table -->
                 <div class="row card">
                     <div class="card-header">
-                        <h5 class="card-title">Car List</h5>
+                        <h3 class="card-title">
+                            <b>Car Management</b>
+                        </h3>
                     </div>
                     <div class="card-body pt-3">
                         <div class="justify-content-between d-flex mb-2">
@@ -50,41 +52,32 @@
                                 </thead>
                                 <tbody id="carTableBody">
                                     <?php
-                                    foreach (
-                                        [
-                                            ['name' => 'BMW M3 GTR', 'brand' => 'BMW', 'type' => 'Sport', 'price' => 'Rp. 15,000,000,000.00', 'stock' => 1, 'updated' => '12-09-2025 16:00:00'],
-                                            ['name' => 'Toyota Supra', 'brand' => 'Toyota', 'type' => 'Sport', 'price' => 'Rp. 1,500,000,000.00', 'stock' => 3, 'updated' => '10-08-2025 14:30:00'],
-                                            ['name' => 'Honda Civic', 'brand' => 'Honda', 'type' => 'Sedan', 'price' => 'Rp. 500,000,000.00', 'stock' => 5, 'updated' => '05-07-2025 10:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Audi A4', 'brand' => 'Audi', 'type' => 'Sedan', 'price' => 'Rp. 800,000,000.00', 'stock' => 4, 'updated' => '01-06-2025 12:00:00'],
-                                            ['name' => 'Volkswagen Golf', 'brand' => 'Volkswagen', 'type' => 'Hatchback', 'price' => 'Rp. 600,000,000.00', 'stock' => 6, 'updated' => '15-05-2025 09:00:00']
-                                        ] as $index => $car
-                                    ): ?>
+                                    include('../../connections/koneksi.php');
+                                    $query = "SELECT * FROM dm_mobil_tbl ORDER BY tanggal_dibuat DESC";
+                                    $result = mysqli_query($connection, $query);
+                                    ?>
+                                    <?php if (mysqli_num_rows($result) > 0): ?>
+                                        <?php foreach ($result as $index => $car): ?>
+                                            <tr>
+                                                <th scope="row" class="text-center"><?= $index + 1 ?></th>
+                                                <td><?= htmlspecialchars($car['nama_mobil']) ?></td>
+                                                <td><?= htmlspecialchars($car['merek_mobil']) ?></td>
+                                                <td><?= htmlspecialchars($car['tipe_mobil']) ?></td>
+                                                <td>Rp. <?= number_format($car['harga_mobil'], 0, ',', '.') ?></td>
+                                                <td><?= $car['stok_mobil'] ?></td>
+                                                <td><?= $car['tanggal_diperbaharui'] ?></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-danger">
+                                                        <i class="bi bi-trash"></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
                                         <tr>
-                                            <th scope="row" class="text-center"><?= $index + 1 ?></th>
-                                            <td><?= $car['name'] ?></td>
-                                            <td><?= $car['brand'] ?></td>
-                                            <td><?= $car['type'] ?></td>
-                                            <td><?= $car['price'] ?></td>
-                                            <td><?= $car['stock'] ?></td>
-                                            <td><?= $car['updated'] ?></td>
-                                            <td>
-                                                <a href="#" class="btn btn-info">
-                                                    <i class="bi bi-pencil-square"></i> Edit
-                                                </a>
-                                                <a href="#" class="btn btn-outline-danger">
-                                                    <i class="bi bi-trash"></i> Delete
-                                                </a>
-                                            </td>
+                                            <td colspan="8" class="text-center">No data available</td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -103,11 +96,32 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery and DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.3.0/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.0/js/dataTables.bootstrap5.js"></script>
     <script>
         $(document).ready(function() {
-            $('#carTable').DataTable({
+            $('#carTable').DataTable({});
+
+            // Populate update modal with car data
+            $('#updateCarModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var nama = button.data('nama');
+                var merek = button.data('merek');
+                var tipe = button.data('tipe');
+                var deskripsi = button.data('deskripsi');
+                var harga = button.data('harga');
+                var stok = button.data('stok');
+
+                var modal = $(this);
+                modal.find('#updateCarId').val(id);
+                modal.find('#updateNamaMobil').val(nama);
+                modal.find('#updateMerekMobil').val(merek);
+                modal.find('#updateTipeMobil').val(tipe);
+                modal.find('#updateDeskripsiMobil').val(deskripsi);
+                modal.find('#updateCarPrice').val(harga);
+                modal.find('#updateStokMobil').val(stok);
             });
         });
     </script>

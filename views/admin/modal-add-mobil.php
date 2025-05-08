@@ -26,10 +26,10 @@
                         <label for="tipe_mobil" class="form-label">Car Type</label>
                         <select class="form-select" id="tipe_mobil" name="tipe_mobil" required>
                             <option value="" disabled selected>Select car type</option>
-                            <option value="Sedan">Sedan</option>
-                            <option value="Hatchback">Hatchback</option>
-                            <option value="SUV">SUV</option>
-                            <option value="Sport">Sport</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="hatchback">Hatchback</option>
+                            <option value="suv">SUV</option>
+                            <option value="supercar">Super car</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -46,6 +46,7 @@
                             <input type="number" class="form-control" id="stok_mobil" name="stok_mobil" placeholder="Enter car stock" required>
                         </div>
                     </div>
+                    <input type="hidden" name="action" value="addCar">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
