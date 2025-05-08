@@ -23,14 +23,14 @@
             <div class="col-4 bg-dark text-white text-center vh-100 d-flex align-items-center justify-content-center">
                 <div class="w-100 p-5 mb-5">
                     <h1 class="mb-5">Verifikasi Akun</h1>
-                    <form action="" method="post" class="mb-3">
+                    <form action="../../logics/admin/forgot-password.php" method="post" class="mb-3">
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Ketikan password baru" required>
+                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Ketikkan password baru" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="ketikan ulang password baru" required>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Ketikkan ulang password baru" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Simpan</button>
+                        <button type="submit" class="btn btn-primary w-100" name="change_password">Simpan</button>
                     </form>
                 </div>
             </div>

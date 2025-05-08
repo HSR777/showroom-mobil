@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = mysqli_real_escape_string($connection, $_POST['username']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
 
-    // Update the column names below to match your database table structure
     $query = "SELECT * FROM dm_akun_tbl WHERE username_akun = '$username' AND password_akun = '$password'";
     $result = mysqli_query($connection, $query);
 
