@@ -1,3 +1,24 @@
+<?php
+session_start();
+include '../../connections/koneksi.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = mysqli_real_escape_string($connection, $_POST['username']);
+    $password = mysqli_real_escape_string($connection, $_POST['password']);
+
+    // Update the column names below to match your database table structure
+    $query = "SELECT * FROM dm_akun_tbl WHERE username_akun = '$username' AND password_akun = '$password'";
+    $result = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($result) === 1) {
+        $_SESSION['admin_logged_in'] = true;
+        header('Location: dashboard.php');
+        exit;
+    } else {
+        $error_message = "Username atau password salah.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +44,11 @@
             <div class="col-4 bg-dark text-white text-center vh-100 d-flex align-items-center justify-content-center">
                 <div class="w-100 p-5 mb-5">
                     <h1 class="mb-5">Login</h1>
+                    <?php if (isset($error_message)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $error_message ?>
+                        </div>
+                    <?php endif; ?>
                     <form action="" method="post" class="mb-3">
                         <div class="mb-3">
                             <!-- <label for="username" class="form-label">Username</label> -->
