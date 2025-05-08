@@ -22,7 +22,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="manajemen-booking.php">
                 <i class="bi bi-calendar-check"></i> Manajemen Booking
             </a>
         </li>
