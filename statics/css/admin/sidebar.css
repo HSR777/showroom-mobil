@@ -1,0 +1,13 @@
+.nav-link {
+    background-color:rgb(15, 56, 118);
+    color: #fff;
+}
+
+.nav-link.active {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+a.nav-link {
+    padding: 15px;
+}
