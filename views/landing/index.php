@@ -55,8 +55,10 @@
         }
 
         .partner-logo {
-            max-height: 60px;
+            max-height: 150px;
+            max-width: auto;
             margin: 0 15px;
+            object-fit: cover;
         }
 
         .schedule-section {
@@ -97,7 +99,7 @@
     <!-- Navbar End -->
 
     <!-- Hero Section Start -->
-    <div class="container-fluid p-0" style="height: 100vh; background: url('../img/cover.jpg') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
+    <div class="container-fluid p-0" style="height: 100vh; background: url('../../img/cover.jpg') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
         <div class="d-flex align-items-center justify-content-center h-100">
             <div class="text-position-fixed top-5 start-70 translate-middle text-white">
                 <h1 style="text-shadow: 2px 2px #000000; color : white; font-family: Poppins; font-size: 2.8rem;">Welcome to Nordique Autohaus</h1>
@@ -150,20 +152,22 @@
         <div class="container text-center">
             <h2 class="mb-4">Partner Kami</h2>
             <div class="row d-flex justify-content-center align-items-center flex-wrap">
-                <div class="card col">
-                    <img src="logos/lamborghini.png" alt="Lamborghini" class="partner-logo">
+                <div class="col">
+                    <img src="../../statics/images/landing/lamborghini.png" alt="Lamborghini" class="partner-logo">
                 </div>
-                <div class="card col">
-                    <img src="logos/lamborghini.png" alt="Lamborghini" class="partner-logo">
+                <div class="col">
+                    <img src="../../statics/images/landing/bmw.png" alt="bmw" class="partner-logo">
                 </div>
-                <div class="card col">
-                    <img src="logos/lamborghini.png" alt="Lamborghini" class="partner-logo">
+                <div class="col">
+                    <img src="../../statics/images/landing/ferrari.png" alt="ferrari" class="partner-logo">
                 </div>
-                <div class="card col">
-                    <img src="logos/lamborghini.png" alt="Lamborghini" class="partner-logo">
+                <div class="col">
+                    <img src="../../statics/images/landing/mercedes.png" alt="mercedes" class="partner-logo">
                 </div>
-                <div class="card col">
-                    <img src="logos/lamborghini.png" alt="Lamborghini" class="partner-logo">
+                <div class="col">
+                    <img src="../../statics/images/landing/porsche.png" alt="porsche" class="partner-logo">
+                </div>
+                
                 </div>
             </div>
         </div>
@@ -177,8 +181,8 @@
         <div class="container">
             <h2 class="text-center mb-5">Tentukan Jadwal Anda</h2>
             <div class="row g-4">
-                <div class="col-lg-6">
-                    <form action="submit_schedule.php" method="post">
+                <div class="col-lg-3">
+                    <!-- <form action="submit_schedule.php" method="post">
                         <div class="mb-3">
                             <label for="firstName" class="form-label">Nama Depan</label>
                             <input type="text" class="form-control" id="firstName" name="firstName" required>
@@ -204,7 +208,27 @@
                             <input type="time" class="form-control" id="time" name="time" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100 rounded-pill">Konfirmasi</button>
-                    </form>
+                    </form> -->
+                    <h4>
+                        <b>Alamat Showroom</b>
+                    </h4>
+                    <hr>
+                    <p>Jl. Raya No. 123, Jakarta, Indonesia</p>
+                    <p>Telp: (021) 123-4567</p>
+                    <p>Email: showroom@gmail.com</p>
+                </div>
+                <div class="col-lg-3">
+                    <h4>
+                        <b>Jam Operasional</b>
+                    </h4>
+                    <hr>
+                    <p><b>Senin</b> : 09.00 - 17.00</p>
+                    <p><b>Selasa</b> : 09.00 - 17.00</p>
+                    <p><b>Rabu</b> : 09.00 - 17.00</p>
+                    <p><b>Kamis</b> : 09.00 - 17.00</p>
+                    <p><b>Jumat</b> : 09.00 - 17.00</p>
+                    <p><b>Sabtu</b> : 09.00 - 17.00</p>
+                    <p><b>Minggu</b> : 09.00 - 17.00</p>
                 </div>
                 <div class="col-lg-6">
                     <iframe src="https://www.google.com/maps/embed?..." width="100%" height="100%" style="border:0; min-height: 400px;" allowfullscreen="" loading="lazy"></iframe>
