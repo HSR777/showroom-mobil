@@ -31,14 +31,6 @@
             border-bottom: 2px solid #D4AF37;
         }
 
-        .hero {
-            position: relative;
-            height: 100vh;
-            background: url('../img/cover.jpg') no-repeat center center;
-            background-size: cover;
-            color: white;
-        }
-
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -72,6 +64,12 @@
             background-color: #f8f9fa;
             padding: 60px 0;
         }
+        .partner-logo {
+            max-width: 150px;
+            height: auto;
+            margin: 0 15px;
+            object-fit: cover;
+        }
     </style>
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -99,7 +97,7 @@
     <?php include 'only-navbar.php'; ?>
 
     <!-- Hero Section Start -->
-    <div class="container-fluid p-0" style="height: 100vh; background: url('../img/cover.jpg') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
+    <div class="container-fluid p-0" style="height: 100vh; background: url('../../img/cover.jpg') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
         <div class="d-flex align-items-center justify-content-center h-100">
             <div class="text-position-fixed top-5 start-70 translate-middle text-white">
                 <h1 style="text-shadow: 2px 2px #000000; color : white; font-family: Poppins; font-size: 2.8rem;">Welcome to Nordique Autohaus</h1>
@@ -173,19 +171,19 @@
             <h2 class="mb-4">Partner Kami</h2>
             <div class="row d-flex justify-content-center align-items-center flex-wrap">
                 <div class="col">
-                    <img src="../img/bmwlogo.png" alt="BMW" class="partner-logo">
+                    <img src="../../img/bmwlogo.png" alt="BMW" class="partner-logo">
                 </div>
                 <div class="col">
-                    <img src="../img/lambologo.png" alt="Lamborghini" class="partner-logo">
+                    <img src="../../img/lambologo.png" alt="Lamborghini" class="partner-logo">
                 </div>
                 <div class="col">
-                    <img src="../img/porschelogo.png" alt="Porsche" class="partner-logo">
+                    <img src="../../img/porschelogo.png" alt="Porsche" class="partner-logo">
                 </div>
                 <div class="col">
-                    <img src="../img/ferarrilogo.png" alt="Ferrari" class="partner-logo">
+                    <img src="../../img/ferarrilogo.png" alt="Ferrari" class="partner-logo">
                 </div>
                 <div class="col">
-                    <img src="../img/merchedeslogo.png" alt="Mercedes" class="partner-logo">
+                    <img src="../../img/merchedeslogo.png" alt="Mercedes" class="partner-logo">
                 </div>
             </div>
         </div>
@@ -257,23 +255,23 @@
                         <tbody>
                             <tr>
                                 <td>Senin</td>
-                                <td>08:00 – 16:00</td>
+                                <td>08:00 - 16:00</td>
                             </tr>
                             <tr>
                                 <td>Selasa</td>
-                                <td>08:00 – 16:00</td>
+                                <td>08:00 - 16:00</td>
                             </tr>
                             <tr>
                                 <td>Rabu</td>
-                                <td>08:00 – 16:00</td>
+                                <td>08:00 - 16:00</td>
                             </tr>
                             <tr>
                                 <td>Kamis</td>
-                                <td>08:00 – 16:00</td>
+                                <td>08:00 - 16:00</td>
                             </tr>
                             <tr>
                                 <td>Jumat</td>
-                                <td>08:00 – 16:00</td>
+                                <td>08:00 - 16:00</td>
                             </tr>
                         </tbody>
                     </table>
