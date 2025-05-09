@@ -182,33 +182,6 @@
             <h2 class="text-center mb-5">Tentukan Jadwal Anda</h2>
             <div class="row g-4">
                 <div class="col-lg-3">
-                    <!-- <form action="submit_schedule.php" method="post">
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label">Nama Depan</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label">Nama Belakang</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Nomor Telepon</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="date" class="form-label">Tanggal Pertemuan</label>
-                            <input type="date" class="form-control" id="date" name="date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="time" class="form-label">Jam Pertemuan</label>
-                            <input type="time" class="form-control" id="time" name="time" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 rounded-pill">Konfirmasi</button>
-                    </form> -->
                     <h4>
                         <b>Alamat Showroom</b>
                     </h4>
