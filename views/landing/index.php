@@ -97,18 +97,26 @@
     <?php include 'only-navbar.php'; ?>
 
     <!-- Hero Section Start -->
-    <div class="container-fluid p-0" style="height: 100vh; background: url('../../img/cover.jpg') no-repeat center center; background-size: cover; position: relative; z-index: -1;">
-        <div class="d-flex align-items-center justify-content-center h-100">
-            <div class="text-position-fixed top-5 start-70 translate-middle text-white">
-                <h1 style="text-shadow: 2px 2px #000000; color : white; font-family: Poppins; font-size: 2.8rem;">Welcome to Nordique Autohaus</h1>
-                <p class="text-center" style="text-shadow: 2px 2px #000000; color : white; font-size: 1.8rem;">Temukan Mobil Impian Anda</p>
-                <div class="d-flex flex-column align-items-center">
-                    <button class="btn fw-semibold text-center mt-3 btn btn-lg" type="button" style="background: linear-gradient(to right, #3775F1, #20438B); color: white;  font-family: Poppins">Our Collection</button>
-                </div>
-            </div>
-        </div>
+<section class="container-fluid p-0 position-relative" style="height: 100vh; background: url('../../img/cover.jpg') no-repeat center center; background-size: cover;">
+  <div class="container h-100">
+    <div class="row h-100">
+      <!-- Kolom kiri: teks + tombol -->
+      <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
+        <h1 class="text-white mb-3" style="text-shadow: 2px 2px #000; font-family: Poppins; font-size: 2.8rem;">
+          Welcome To Nordique Autohaus
+        </h1>
+        <p class="text-white mb-4" style="text-shadow: 2px 2px #000; font-size: 1.8rem;">
+            Temukan Mobil Impian Anda
+        </p>
+        <button type="button" class="btn btn-primary btn-lg">Our Collection</button>
+      </div>
+      <!-- Kolom kanan kosong -->
+      <div class="col-12 col-lg-6"></div>
     </div>
-    <!-- Hero Section End -->
+  </div>
+</section>
+<!-- Hero Section End -->
+
 
     <!-- start -->
     <?php // Features Section 
@@ -190,42 +198,6 @@
     </section>
     <!-- end -->
 
-    <!-- Start -->
-    <!-- <?php // Schedule Section 
-            ?> -->
-    <!-- <section id="schedule" class="schedule-section">
-        <div class="container">
-            <h2 class="text-center mb-5">Tentukan Jadwal Anda</h2>
-            <div class="row g-4">
-                <div class="col-lg-6"> -->
-    <!-- <form action="submit_schedule.php" method="post">
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label">Nama Depan</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label">Nama Belakang</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Nomor Telepon</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="date" class="form-label">Tanggal Pertemuan</label>
-                            <input type="date" class="form-control" id="date" name="date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="time" class="form-label">Jam Pertemuan</label>
-                            <input type="time" class="form-control" id="time" name="time" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 rounded-pill">Konfirmasi</button>
-                    </form>
-                </div> -->
 
     <section class="py-5" style="background-color: #f1f1f1;">
         <div class="container">
@@ -294,7 +266,8 @@
 
     <!-- end -->
 
-    <?php // Footer 
+    <!-- footer -->
+    <?php  
     ?>
     <footer class="py-4 bg-dark text-light text-center">
         <div class="container">
