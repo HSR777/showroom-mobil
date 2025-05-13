@@ -54,20 +54,21 @@
             background-color: #3775F1;
         }
 
-        .partner-logo {
+        /* .partner-logo {
             max-width: 5rem;
             height: auto;
             margin: 0 15px;
-        }
+        } */
 
         .schedule-section {
             background-color: #f8f9fa;
             padding: 60px 0;
         }
+
         .partner-logo {
-            max-width: 150px;
-            height: auto;
-            margin: 0 15px;
+            max-height: 150px;
+            /* min-height: 10rem;
+            max-width: auto; */
             object-fit: cover;
         }
     </style>
@@ -97,25 +98,25 @@
     <?php include 'only-navbar.php'; ?>
 
     <!-- Hero Section Start -->
-<section class="container-fluid p-0 position-relative" style="height: 100vh; background: url('../../img/cover.jpg') no-repeat center center; background-size: cover;">
-  <div class="container h-100">
-    <div class="row h-100">
-      <!-- Kolom kiri: teks + tombol -->
-      <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
-        <h1 class="text-white mb-3" style="text-shadow: 2px 2px #000; font-family: Poppins; font-size: 2.8rem;">
-          Welcome To Nordique Autohaus
-        </h1>
-        <p class="text-white mb-4" style="text-shadow: 2px 2px #000; font-size: 1.8rem;">
-            Temukan Mobil Impian Anda
-        </p>
-        <button type="button" class="btn btn-primary btn-lg">Our Collection</button>
-      </div>
-      <!-- Kolom kanan kosong -->
-      <div class="col-12 col-lg-6"></div>
-    </div>
-  </div>
-</section>
-<!-- Hero Section End -->
+    <section class="container-fluid p-0 position-relative" style="height: 100vh; background: url('../../img/cover.jpg') no-repeat center center; background-size: cover;">
+        <div class="container h-100">
+            <div class="row h-100">
+                <!-- Kolom kiri: teks + tombol -->
+                <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
+                    <h1 class="text-white mb-3" style="text-shadow: 2px 2px #000; font-family: Poppins; font-size: 2.8rem;">
+                        Welcome To Nordique Autohaus
+                    </h1>
+                    <p class="text-white mb-4" style="text-shadow: 2px 2px #000; font-size: 1.8rem;">
+                        Temukan Mobil Impian Anda
+                    </p>
+                    <button type="button" class="btn btn-primary btn-lg">Our Collection</button>
+                </div>
+                <!-- Kolom kanan kosong -->
+                <div class="col-12 col-lg-6"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
 
 
     <!-- start -->
@@ -178,20 +179,22 @@
         <div class="container text-center">
             <h2 class="mb-4">Partner Kami</h2>
             <div class="row d-flex justify-content-center align-items-center flex-wrap">
-                <div class="col">
-                    <img src="../../img/bmwlogo.png" alt="BMW" class="partner-logo">
+                <div class="col mx-2">
+                    <img src="../../statics/images/landing/lamborghini.png" alt="Lamborghini" class="partner-logo">
                 </div>
-                <div class="col">
-                    <img src="../../img/lambologo.png" alt="Lamborghini" class="partner-logo">
+                <div class="col mx-2">
+                    <img src="../../statics/images/landing/bmw.png" alt="bmw" class="partner-logo">
                 </div>
-                <div class="col">
-                    <img src="../../img/porschelogo.png" alt="Porsche" class="partner-logo">
+                <div class="col mx-2">
+                    <img src="../../statics/images/landing/ferrari.png" alt="ferrari" class="partner-logo">
                 </div>
-                <div class="col">
-                    <img src="../../img/ferarrilogo.png" alt="Ferrari" class="partner-logo">
+                <div class="col mx-2">
+                    <img src="../../statics/images/landing/mercedes.png" alt="mercedes" class="partner-logo" style="height: 115px;">
                 </div>
-                <div class="col">
-                    <img src="../../img/merchedeslogo.png" alt="Mercedes" class="partner-logo">
+                <div class="col mx-2">
+                    <img src="../../statics/images/landing/porsche.png" alt="porsche" class="partner-logo">
+                </div>
+                
                 </div>
             </div>
         </div>
@@ -267,7 +270,7 @@
     <!-- end -->
 
     <!-- footer -->
-    <?php  
+    <?php
     ?>
     <footer class="py-4 bg-dark text-light text-center">
         <div class="container">

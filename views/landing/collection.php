@@ -134,138 +134,41 @@
             <!-- Brand Cards -->
             <div class="col-12 col-md-9">
                 <div class="row g-3">
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M4</b></h6>
+                    <?php
+                    $brandList = [
+                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
+                        ['name' => 'BMW M4', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm4white.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
+                        ['name' => 'Mercedes C-Class', 'brand' => 'Mercedes', 'logo' => '../../img/merchedeslogo.png', 'image' => '../../img/cclass.jpg'],
+                        // Add more brands as needed
+                    ];
+
+                    foreach ($brandList as $brand):
+                    ?>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="card shadow h-100">
+                                <img src="<?= $brand['image']; ?>" class="card-img-top" alt="<?= $brand['name']; ?>" style="height: 200px; object-fit: contain;">
+                                <div class="card-footer d-flex align-items-center">
+                                    <img src="<?= $brand['logo']; ?>" alt="<?= $brand['brand']; ?> Logo" class="me-2" style="width: 24px; height: 24px;">
+                                    <h6 class="mb-0"><b><?= $brand['name']; ?></b></h6>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm4white.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M4</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 02: Lamborghini -->
-                    <div class="col-6 col-lg-4 col-lg-2">
-                        <div class="card shadow h-100">
-                            <img src="../../img/bmwm3.jpg" class="card-img-top partner-logo-center" alt="Lamborghini">
-                            <div class="card-footer d-flex align-items-center">
-                                <img src="../../img/bmwlogo.png" alt="BMW Logo" class="me-2" style="width: 24px; height: 24px;">
-                                <h6><b>BMW M3</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <?php endforeach; ?>
                 </div>
 
                 <!-- pagination -->
@@ -291,10 +194,8 @@
                         </ul>
                     </nav>
                 </div>
-                <!--  -->
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Footer -->
@@ -306,10 +207,81 @@
         </div>
     </footer>
 
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const itemsPerPage = 16; // Number of cards to display per page
+        const totalPages = Math.ceil(document.querySelectorAll('.col-6.col-md-4.col-lg-3').length / itemsPerPage); // Calculate total number of pages
+        let currentPage = 1; // Initialize the current page to 1
+
+        function renderPagination() {
+            const pagination = document.querySelector('.pagination'); // Select the pagination container
+            pagination.innerHTML = ""; // Clear existing pagination items
+
+            const createPageItem = (page, isActive = false) => { // Function to create a pagination item
+                const li = document.createElement("li"); // Create a list item element
+                li.className = "page-item" + (isActive ? " active" : ""); // Add active class if the page is the current page
+                li.innerHTML = `<a class="page-link rounded-circle hover-primary" href="#">${page}</a>`; // Set the inner HTML for the page link
+                li.addEventListener("click", function(e) { // Add click event listener to the page item
+                    e.preventDefault(); // Prevent default link behavior
+                    currentPage = page; // Update the current page
+                    updateVisibleCards(); // Update the visible cards based on the current page
+                    renderPagination(); // Re-render the pagination
+                });
+                return li; // Return the created list item
+            };
+
+            // Previous button
+            const prevLi = document.createElement("li"); // Create a list item for the previous button
+            prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : ""); // Disable the button if on the first page
+            prevLi.innerHTML = `
+                <a class="page-link rounded-circle" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span> <!-- Left arrow for previous -->
+                </a>
+            `;
+            prevLi.addEventListener("click", function(e) { // Add click event listener to the previous button
+                e.preventDefault(); // Prevent default link behavior
+                if (currentPage > 1) { // Check if not on the first page
+                    currentPage--; // Decrement the current page
+                    updateVisibleCards(); // Update the visible cards
+                    renderPagination(); // Re-render the pagination
+                }
+            });
+            pagination.appendChild(prevLi); // Append the previous button to the pagination container
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) { // Loop through all pages
+                pagination.appendChild(createPageItem(i, i === currentPage)); // Create and append a page item for each page
+            }
+
+            // Next button
+            const nextLi = document.createElement("li"); // Create a list item for the next button
+            nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : ""); // Disable the button if on the last page
+            nextLi.innerHTML = `
+                <a class="page-link rounded-circle" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span> <!-- Right arrow for next -->
+                </a>
+            `;
+            nextLi.addEventListener("click", function(e) { // Add click event listener to the next button
+                e.preventDefault(); // Prevent default link behavior
+                if (currentPage < totalPages) { // Check if not on the last page
+                    currentPage++; // Increment the current page
+                    updateVisibleCards(); // Update the visible cards
+                    renderPagination(); // Re-render the pagination
+                }
+            });
+            pagination.appendChild(nextLi); // Append the next button to the pagination container
+        }
+
+        function updateVisibleCards() {
+            const cards = document.querySelectorAll('.col-6.col-md-4.col-lg-3'); // Select all card elements
+            cards.forEach((card, index) => { // Loop through all cards
+                card.style.display = (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) ? "block" : "none"; // Show cards for the current page and hide others
+            });
+        }
+
+        updateVisibleCards(); // Initial call to update the visible cards
+        renderPagination(); // Initial call to render the pagination
+    </script>
 
 </body>
 

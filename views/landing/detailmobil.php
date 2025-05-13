@@ -22,9 +22,9 @@
         <div class="container h-100">
             <div class="row h-100">
                 <!-- Kolom kiri: teks + tombol -->
-                <div class="col-12 col-lg-6 d-flex flex-column justify-content-center" style="margin-top: 50px;">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="../../img/bmwlogo.png" alt="Logo" style="width: 100px; height: 100px; margin-right: 15px;">
+                <div class="col-12 col-lg-6 d-flex flex-column justify-content-center text-center text-lg-start" style="margin-top: 50px;">
+                    <div class="d-flex flex-column flex-lg-row align-items-center mb-3">
+                        <img src="../../img/bmwlogo.png" alt="Logo" class="mb-3 mb-lg-0" style="width: 100px; height: 100px; margin-right: 15px;">
                         <div>
                             <h1 class="text-white" style="text-shadow: 2px 2px #000; font-family: Poppins; font-size: 2.8rem;">
                                 TEMERIO
@@ -32,7 +32,7 @@
                             <p class="text-white mb-4" style="text-shadow: 2px 2px #000; font-size: 1.8rem;">
                                 Galardo
                             </p>
-                            <button type="button" class="btn btn-primary btn-lg w-30">Enquire</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 w-lg-30">Enquire</button>
                         </div>
                     </div>
                 </div>
@@ -65,115 +65,71 @@
 
     <!-- section -->
     <section class="py-5">
-  <div class="container">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h3 class="text-center mb-2"><b>Tentukan Jadwal Anda</b></h3>
+                    <hr style="border: 2px solid black;">
+                </div>
+            </div>
 
-    <div class="row mb-4">
-      <div class="col">
-        <h3 class="text-center mb-2"><b>Tentukan Jadwal Anda</b></h3>
-        <hr style="border: 2px solid black;">
-      </div>
-    </div>
+            <!-- Form -->
+            <form action="submit_schedule.php" method="post">
+                <div class="row gx-4 gy-3">
+                    <!-- Kolom kiri -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="text" id="firstName" name="firstName" class="form-control border-0 border-bottom rounded-0" placeholder="Nama Depan" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" id="phone" name="phone" class="form-control border-0 border-bottom rounded-0" placeholder="Nomor Telepon" required>
+                        </div>
+                        <div class="mb-3">
+                            <select id="date" name="date" class="form-select border-0 border-bottom rounded-0" required>
+                                <option value="" disabled selected>Pilih tanggal</option>
+                                <option>2025-01-01</option>
+                                <option>2025-01-02</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <!-- Form  -->
-    <form action="submit_schedule.php" method="post">
-      <div class="row gx-4 gy-3 align-items-end">
-        <!-- Kolom kiri -->
-        <div class="col-md-6">
-          <div class="mb-3">
-            <input 
-              type="text" 
-              id="firstName" 
-              name="firstName"
-              class="form-control border-0 border-bottom rounded-0"
-              placeholder="Nama Depan"
-              required
-            >
-          </div>
-          <div class="mb-3">
-            <input 
-              type="tel" 
-              id="phone" 
-              name="phone"
-              class="form-control border-0 border-bottom rounded-0"
-              placeholder="Nomor Telepon"
-              required
-            >
-          </div>
-          <div class="mb-3">
-            <select 
-              id="date" 
-              name="date"
-              class="form-select border-0 border-bottom rounded-0"
-              required
-            >
-              <option value="" disabled selected>Pilih tanggal</option>
-              <option>2025-01-01</option>
-              <option>2025-01-02</option>
-              <!-- dst. -->
-            </select>
-          </div>
+                    <!-- Kolom kanan -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="text" id="lastName" name="lastName" class="form-control border-0 border-bottom rounded-0" placeholder="Nama Belakang" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" id="email" name="email" class="form-control border-0 border-bottom rounded-0" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <select id="time" name="time" class="form-select border-0 border-bottom rounded-0" required>
+                                <option value="" disabled selected>Pilih jam</option>
+                                <option>09:00</option>
+                                <option>10:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="col-12 text-center text-md-end mt-3">
+                        <button type="submit" class="btn btn-primary px-4 w-100 w-md-auto">
+                            Konfirmasi
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
+    </section>
+    <!-- End Form Section -->
 
-        <!-- Kolom kanan -->
-        <div class="col-md-6">
-          <div class="mb-3">
-            <input 
-              type="text" 
-              id="lastName" 
-              name="lastName"
-              class="form-control border-0 border-bottom rounded-0"
-              placeholder="Nama Belakang"
-              required
-            >
-          </div>
-          <div class="mb-3">  
-            <input 
-              type="email" 
-              id="email" 
-              name="email"
-              class="form-control border-0 border-bottom rounded-0"
-              placeholder="Email"
-              required
-            >
-          </div>
-          <div class="mb-3">            
-            <select 
-              id="time" 
-              name="time"
-              class="form-select border-0 border-bottom rounded-0"
-              required
-            >
-              <option value="" disabled selected>Pilih jam</option>
-              <option>09:00</option>
-              <option>10:00</option>
-              
-            </select>
-          </div>
-        </div>
-
-        <!-- btn -->
-        <div class="col-12 text-end mt-3">
-          <button type="submit" class="btn btn-primary px-4">
-            Konfirmasi
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</section>
-<!-- end -->
-
-                
-
-<!-- footer -->
-    <?php  
-    ?>
+    <!-- Footer -->
+    <?php ?>
     <footer class="py-4 bg-dark text-light text-center">
         <div class="container">
             <small>&copy; Nordique Autohaus 2025</small>
         </div>
     </footer>
-    <!-- end --> 
-     
+    <!-- End Footer -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
