@@ -137,6 +137,9 @@
                     <?php
                     $brandList = [
                         ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
+                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
+                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
+                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
                         ['name' => 'BMW M4', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm4white.jpg'],
                         ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
                         ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
