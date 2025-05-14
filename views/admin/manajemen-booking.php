@@ -52,6 +52,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         <tbody>
                                             <?php
                                             require_once('../../connections/koneksi.php');
+
                                             $q = mysqli_query($connection, "
                                             SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
                                             FROM tr_pembelian_mobil_tbl t
@@ -191,8 +192,64 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <b>Tabel Test</b>
+                                    <b>Daftar Pesanan Selesai (Invoice)</b>
                                 </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Pemesan</th>
+                                                <th>Email</th>
+                                                <th>Mobil</th>
+                                                <th>Tanggal Booking</th>
+                                                <th>Jam Booking</th>
+                                                <th>Harga Deal</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            // Ambil pesanan dengan status 'selesai'
+                                            $q2 = mysqli_query($connection, "
+                                                SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, m.nama_mobil
+                                                FROM tr_pembelian_mobil_tbl t
+                                                JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
+                                                JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
+                                                WHERE t.status_transaksi = 'selesai'
+                                                ORDER BY t.updated_at DESC
+                                            ");
+                                            $no2 = 1;
+                                            while ($row2 = mysqli_fetch_assoc($q2)) {
+                                                $nama2 = htmlspecialchars($row2['nama_depan_calon_buyer'] . ' ' . $row2['nama_belakang_calon_buyer']);
+                                                $email2 = htmlspecialchars($row2['email_calon_buyer']);
+                                                $mobil2 = htmlspecialchars($row2['nama_mobil']);
+                                                $tanggal2 = htmlspecialchars(date('d-m-Y', strtotime($row2['tanggal_jam_janjian'])));
+                                                $jam2 = htmlspecialchars(date('H:i', strtotime($row2['tanggal_jam_janjian'])));
+                                                $harga2 = 'Rp. ' . number_format($row2['harga_deal'], 0, ',', '.');
+                                                $id_transaksi2 = $row2['id_transaksi'];
+                                            ?>
+                                            <tr>
+                                                <td><?= $no2 ?></td>
+                                                <td><?= $nama2 ?></td>
+                                                <td><?= $email2 ?></td>
+                                                <td><?= $mobil2 ?></td>
+                                                <td><?= $tanggal2 ?></td>
+                                                <td><?= $jam2 ?></td>
+                                                <td><?= $harga2 ?></td>
+                                                <td>
+                                                    <a href="../../logics/admin/invoice.php?id=<?= $id_transaksi2 ?>" target="_blank" class="btn btn-primary btn-sm">Print Invoice</a>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                $no2++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
