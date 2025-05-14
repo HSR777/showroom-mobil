@@ -34,5 +34,5 @@ foreach ($days as $day) {
 }
 
 // Redirect kembali ke halaman manajemen booking
-header('Location: ../../views/admin/manajemen-booking.php');
+echo "<script>alert('Jadwal berhasil disimpan!'); window.location.href='../../views/admin/manajemen-booking.php';</script>";
 exit;

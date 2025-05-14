@@ -40,7 +40,7 @@
     <!-- Groub 01 End -->
     <div class="mt-auto mb-3 text-center d-grid">
         <hr>
-        <a href="../../logics/admin/logout.php" class="btn btn-outline-danger" style="border-radius: 0;">
+        <a href="../../logics/admin/logout.php" class="btn btn-outline-danger m-1" style="border-radius: 0;">
             <i class="bi bi-box-arrow-right"></i> Logout
         </a>
     </div>

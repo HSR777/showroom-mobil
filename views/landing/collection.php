@@ -200,7 +200,7 @@
                 <div class="row g-3" id="carsContainer">
                     <?php
                     include('../../connections/koneksi.php');
-                    $query = "SELECT * FROM dm_mobil_tbl ORDER BY tanggal_dibuat DESC";
+                    $query = "SELECT * FROM dm_mobil_tbl ORDER BY tanggal_dibuat ASC";
                     $result = mysqli_query($connection, $query);
                     if ($result && mysqli_num_rows($result) > 0):
                         foreach ($result as $car):
