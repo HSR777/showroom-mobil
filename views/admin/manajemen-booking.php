@@ -73,7 +73,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                             <td><?= $status ?></td>
                                             <td>
                                                 <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal<?= $id_transaksi ?>">Detail</button>
-                                                <button class="btn btn-success btn-sm" onclick="handleSimpan(<?= $id_transaksi ?>)">Simpan</button>
+                                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusModal<?= $id_transaksi ?>">Update Status</button>
                                             </td>
                                         </tr>
                                         <?php
@@ -89,7 +89,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                 'Status' => $status,
                                                 'Harga Deal' => 'Rp. ' . number_format($row['harga_deal'], 0, ',', '.'),
                                                 'Tanggal Transaksi' => htmlspecialchars($row['tanggal_transaksi']),
-                                            ]
+                                            ],
+                                            'status' => $status
                                         ];
                                         $no++;
                                     }
@@ -119,6 +120,35 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                       </div>
                                     </div>
+                                  </div>
+                                </div>
+                                <!-- Modal Update Status -->
+                                <div class="modal fade" id="statusModal<?= $modal['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?= $modal['id'] ?>" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <form method="post" action="../../logics/admin/crud-booking.php">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="statusModalLabel<?= $modal['id'] ?>">Update Status Booking</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <input type="hidden" name="id_transaksi" value="<?= $modal['id'] ?>">
+                                          <div class="mb-3">
+                                            <label for="status_transaksi_<?= $modal['id'] ?>" class="form-label">Status</label>
+                                            <select class="form-select" id="status_transaksi_<?= $modal['id'] ?>" name="status_transaksi" required>
+                                              <option value="pending" <?= $modal['status']=='pending'?'selected':''; ?>>Pending</option>
+                                              <option value="on-going" <?= $modal['status']=='on-going'?'selected':''; ?>>On-Going</option>
+                                              <option value="selesai" <?= $modal['status']=='selesai'?'selected':''; ?>>Selesai</option>
+                                              <option value="batal" <?= $modal['status']=='batal'?'selected':''; ?>>Batal</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="submit" name="update_status" class="btn btn-success">Simpan</button>
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        </div>
+                                      </div>
+                                    </form>
                                   </div>
                                 </div>
                                 <?php endforeach; ?>
