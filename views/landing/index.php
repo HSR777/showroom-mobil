@@ -228,26 +228,26 @@
                     <h6 class="fw-bold border-bottom border-2 border-dark pb-2 mb-4">Jadwal Buka</h6>
                     <table class="table table-borderless mb-0">
                         <tbody>
-                            <tr>
-                                <td>Senin</td>
-                                <td>08:00 - 16:00</td>
-                            </tr>
-                            <tr>
-                                <td>Selasa</td>
-                                <td>08:00 - 16:00</td>
-                            </tr>
-                            <tr>
-                                <td>Rabu</td>
-                                <td>08:00 - 16:00</td>
-                            </tr>
-                            <tr>
-                                <td>Kamis</td>
-                                <td>08:00 - 16:00</td>
-                            </tr>
-                            <tr>
-                                <td>Jumat</td>
-                                <td>08:00 - 16:00</td>
-                            </tr>
+                            <?php
+                            require_once('../../connections/koneksi.php');
+                            $result = mysqli_query($connection, "SELECT * FROM dm_jadwal_tbl ORDER BY FIELD(hari_jadwal, 'senin','selasa','rabu','kamis','jumat','sabtu','minggu')");
+                            $hari_map = [
+                                'senin' => 'Senin',
+                                'selasa' => 'Selasa',
+                                'rabu' => 'Rabu',
+                                'kamis' => 'Kamis',
+                                'jumat' => 'Jumat',
+                                'sabtu' => 'Sabtu',
+                                'minggu' => 'Minggu'
+                            ];
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $hari = isset($hari_map[$row['hari_jadwal']]) ? $hari_map[$row['hari_jadwal']] : ucfirst($row['hari_jadwal']);
+                                echo "<tr>
+                                    <td>{$hari}</td>
+                                    <td>" . htmlspecialchars(substr($row['jam_buka'],0,5)) . " - " . htmlspecialchars(substr($row['jam_tutup'],0,5)) . "</td>
+                                </tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
