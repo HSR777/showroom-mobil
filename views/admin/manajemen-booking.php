@@ -74,37 +74,45 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                         <h5>Pengaturan Jadwal</h5>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <?php
+                        // Ambil data jadwal dari database
+                        require_once('../../connections/koneksi.php');
+                        $jadwal_data = [];
+                        $result = mysqli_query($connection, "SELECT * FROM dm_jadwal_tbl");
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $jadwal_data[$row['hari_jadwal']] = $row;
+                        }
+                        ?>
+                        <form action="../../logics/admin/crud-jadwal.php" method="POST">
                             <?php
                             $days = [
-                                'Senin' => 'monday',
-                                'Selasa' => 'tuesday',
-                                'Rabu' => 'wednesday',
-                                'Kamis' => 'thursday',
-                                'Jumat' => 'friday',
-                                'Sabtu' => 'saturday',
-                                'Minggu' => 'sunday'
+                                'Senin' => 'senin',
+                                'Selasa' => 'selasa',
+                                'Rabu' => 'rabu',
+                                'Kamis' => 'kamis',
+                                'Jumat' => 'jumat',
+                                'Sabtu' => 'sabtu',
+                                'Minggu' => 'minggu'
                             ];
 
-                            $id_jadwal = 1; // Initialize id_jadwal
                             foreach ($days as $day_name => $day_key) {
+                                $jadwal = isset($jadwal_data[$day_key]) ? $jadwal_data[$day_key] : null;
                             ?>
                                 <div class="row mb-2">
                                     <h5>
                                         <b><?= $day_name ?></b>
                                     </h5>
-                                    <input type="hidden" name="id_jadwal_<?= $day_key ?>" value="<?= $id_jadwal ?>">
+                                    <input type="hidden" name="id_jadwal_<?= $day_key ?>" value="<?= $jadwal ? $jadwal['id_jadwal'] : '' ?>">
                                     <div class="col">
                                         <label for="start_time_<?= $day_key ?>" class="form-label">Waktu buka</label>
-                                        <input type="time" class="form-control" id="start_time_<?= $day_key ?>" name="start_time_<?= $day_key ?>" required>
+                                        <input type="time" class="form-control" id="start_time_<?= $day_key ?>" name="start_time_<?= $day_key ?>" value="<?= $jadwal ? htmlspecialchars($jadwal['jam_buka']) : '' ?>" required>
                                     </div>
                                     <div class="col">
                                         <label for="end_time_<?= $day_key ?>" class="form-label">Waktu tutup</label>
-                                        <input type="time" class="form-control" id="end_time_<?= $day_key ?>" name="end_time_<?= $day_key ?>" required>
+                                        <input type="time" class="form-control" id="end_time_<?= $day_key ?>" name="end_time_<?= $day_key ?>" value="<?= $jadwal ? htmlspecialchars($jadwal['jam_tutup']) : '' ?>" required>
                                     </div>
                                 </div>
                             <?php
-                                $id_jadwal++; // Increment id_jadwal for the next day
                             }
                             ?>
                             <button type="submit" class="btn btn-primary">Simpan</button>
