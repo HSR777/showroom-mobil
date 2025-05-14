@@ -1,3 +1,14 @@
+<?php
+include('../../connections/koneksi.php');
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$car = null;
+if ($id > 0) {
+    $result = mysqli_query($connection, "SELECT * FROM dm_mobil_tbl WHERE id_mobil = $id LIMIT 1");
+    if ($result && mysqli_num_rows($result) > 0) {
+        $car = mysqli_fetch_assoc($result);
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,22 +28,22 @@
     <?php include('only-navbar.php'); ?>
     <!-- end -->
 
+    <?php if ($car): ?>
     <!-- Hero Section Start -->
-    <section class="container-fluid p-0 position-relative" style="height: 100vh; background: url('../../img/bmwm4.png') no-repeat center center; background-size: cover;">
+    <section class="container-fluid p-0 position-relative" style="height: 60vh; background: url('../../<?= htmlspecialchars($car['gambar_mobil']) ?>') no-repeat center center; background-size: cover;">
         <div class="container h-100">
             <div class="row h-100">
                 <!-- Kolom kiri: teks + tombol -->
                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center text-center text-lg-start" style="margin-top: 50px;">
                     <div class="d-flex flex-column flex-lg-row align-items-center mb-3">
-                        <img src="../../img/bmwlogo.png" alt="Logo" class="mb-3 mb-lg-0" style="width: 100px; height: 100px; margin-right: 15px;">
                         <div>
                             <h1 class="text-white" style="text-shadow: 2px 2px #000; font-family: Poppins; font-size: 2.8rem;">
-                                TEMERIO
+                                <?= htmlspecialchars(strtoupper($car['nama_mobil'])) ?>
                             </h1>
                             <p class="text-white mb-4" style="text-shadow: 2px 2px #000; font-size: 1.8rem;">
-                                Galardo
+                                <?= htmlspecialchars(ucfirst($car['merek_mobil'])) ?>
                             </p>
-                            <button type="button" class="btn btn-primary btn-lg w-100 w-lg-30">Enquire</button>
+                            <button type="button" class="btn btn-primary btn-lg w-100 w-lg-30" onclick="document.getElementById('form-booking').scrollIntoView({ behavior: 'smooth' });">Enquire</button>
                         </div>
                     </div>
                 </div>
@@ -49,22 +60,30 @@
             <div class="row g-0 align-items-center">
                 <div class="col-md-6">
                     <div class="p-4">
-                        <h2><b>Over view</b></h2>
-                        <p>Lamborghini introduces Temerario, the first super sports car in the history of the Sant'Agata Bolognese-based brand to be equipped with a V8 twin-turbo engine paired with three electric motors, with an overall maximum power of 920 CV. It is the second vehicle in the HPEV (High Performance Electrified Vehicle) range, at the top in terms of driving pleasure thanks to its performance and comfort, unique in its category. It features new design style concepts, while offering unprecedented customization options and connectivity content never seen before.</p>
+                        <h2><b>Overview</b></h2>
+                        <p><?= nl2br(htmlspecialchars($car['deskripsi_mobil'])) ?></p>
+                        <ul class="list-unstyled text-start mx-auto" style="max-width:400px;">
+                            <li><b>Type:</b> <?= htmlspecialchars(ucfirst($car['tipe_mobil'])) ?></li>
+                            <li><b>Stock:</b> <?= htmlspecialchars($car['stok_mobil']) ?></li>
+                            <li><b>Price:</b> Rp. <?= number_format($car['harga_mobil'], 0, ',', '.') ?></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-6 p-0">
-                    <img src="../../img/bmwm4.png" alt="Lamborghini Temerario" class="img-fluid rounded-0" style="width: 100%; height: auto; margin: 0;">
+                    <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" alt="<?= htmlspecialchars($car['nama_mobil']) ?>" class="img-fluid rounded-0" style="width: 100%; height: auto; margin: 0;">
                 </div>
             </div>
         </div>
     </section>
     <!-- end -->
+    <?php else: ?>
+        <div class="container py-5">
+            <div class="alert alert-danger text-center">Car not found.</div>
+        </div>
+    <?php endif; ?>
 
-
-
-    <!-- section -->
-    <section class="py-5">
+    <!-- section Form booking -->
+    <section class="py-5" id="form-booking">
         <div class="container">
             <div class="row mb-4">
                 <div class="col">
@@ -123,7 +142,6 @@
     <!-- End Form Section -->
 
     <!-- Footer -->
-    <?php ?>
     <footer class="py-4 bg-dark text-light text-center">
         <div class="container">
             <small>&copy; Nordique Autohaus 2025</small>

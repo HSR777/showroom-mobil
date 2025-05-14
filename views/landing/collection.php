@@ -32,7 +32,7 @@
     <!--  -->
     <div class="container-fluid text-light py-5" style="background-color:rgba(26, 26, 26, 0.76);">
         <div class="mt-5" style="margin-right: 15%; margin-left: 15%;">
-            <h1 style="background: linear-gradient(to right, #D4AF37, #6E5B1D); -webkit-background-clip: text; color: transparent;">
+            <h1 style="background: linear-gradient(to right, #D4AF37, #6E5B1D); -webkit-background-clip: text; background-clip: text; color: transparent;">
                 <b>Our Collection</b>
             </h1>
             <p>Discover timeless European automotive artistry. Every model in our lineup is carefully selected to deliver more than just performance — it delivers prestige.</p>
@@ -135,43 +135,31 @@
             <div class="col-12 col-md-9">
                 <div class="row g-3">
                     <?php
-                    $brandList = [
-                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
-                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
-                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
-                        ['name' => 'BMW M3', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm3.jpg'],
-                        ['name' => 'BMW M4', 'brand' => 'BMW', 'logo' => '../../img/bmwlogo.png', 'image' => '../../img/bmwm4white.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Lamborghini Huracan', 'brand' => 'Lamborghini', 'logo' => '../../img/lambologo.png', 'image' => '../../img/aventador_ultimae_roadster_m.jpg'],
-                        ['name' => 'Mercedes C-Class', 'brand' => 'Mercedes', 'logo' => '../../img/merchedeslogo.png', 'image' => '../../img/cclass.jpg'],
-                        // Add more brands as needed
-                    ];
-
-                    foreach ($brandList as $brand):
+                    include('../../connections/koneksi.php');
+                    $query = "SELECT * FROM dm_mobil_tbl ORDER BY tanggal_dibuat DESC";
+                    $result = mysqli_query($connection, $query);
+                    if ($result && mysqli_num_rows($result) > 0):
+                        foreach ($result as $car):
                     ?>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="card shadow h-100">
-                                <img src="<?= $brand['image']; ?>" class="card-img-top" alt="<?= $brand['name']; ?>" style="height: 200px; object-fit: contain;">
-                                <div class="card-footer d-flex align-items-center">
-                                    <img src="<?= $brand['logo']; ?>" alt="<?= $brand['brand']; ?> Logo" class="me-2" style="width: 24px; height: 24px;">
-                                    <h6 class="mb-0"><b><?= $brand['name']; ?></b></h6>
+                            <a href="detailmobil.php?id=<?= $car['id_mobil'] ?>" style="text-decoration: none; color: inherit;">
+                                <div class="card shadow h-100">
+                                    <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" class="card-img-top" alt="<?= htmlspecialchars($car['nama_mobil']) ?>" style="height: 200px; object-fit: contain;">
+                                    <div class="card-footer d-flex align-items-center">
+                                        <span class="me-2"><?= htmlspecialchars(ucfirst($car['merek_mobil'])) ?></span>
+                                        <h6 class="mb-0"><b><?= htmlspecialchars($car['nama_mobil']) ?></b></h6>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                    <?php endforeach; ?>
+                    <?php
+                        endforeach;
+                    else:
+                    ?>
+                        <div class="col-12">
+                            <div class="alert alert-warning text-center">No cars available.</div>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- pagination -->

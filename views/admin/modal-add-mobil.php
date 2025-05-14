@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="addCarModalLabel">Add New Car</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="../../logics/admin/crud-mobil.php" method="POST">
+            <form action="../../logics/admin/crud-mobil.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama_mobil" class="form-label">Car Name</label>
@@ -45,6 +45,14 @@
                             <label for="stok_mobil" class="form-label">Stock</label>
                             <input type="number" class="form-control" id="stok_mobil" name="stok_mobil" placeholder="Enter car stock" required>
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar_mobil" class="form-label">Main Car Image</label>
+                        <input type="file" class="form-control" id="gambar_mobil" name="gambar_mobil" accept="image/*" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar_mobil_overview" class="form-label">Overview Car Image</label>
+                        <input type="file" class="form-control" id="gambar_mobil_overview" name="gambar_mobil_overview" accept="image/*" required>
                     </div>
                     <input type="hidden" name="action" value="addCar">
                 </div>

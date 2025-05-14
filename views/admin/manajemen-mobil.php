@@ -48,6 +48,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                 <thead class="table-dark">
                                     <tr>
                                         <th scope="col">No</th>
+                                        <th scope="col">Overview Image</th>
                                         <th scope="col">Car Name</th>
                                         <th scope="col">Car Brand</th>
                                         <th scope="col">Car Type</th>
@@ -67,6 +68,13 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         <?php foreach ($result as $index => $car): ?>
                                             <tr>
                                                 <th scope="row" class="text-center"><?= $index + 1 ?></th>
+                                                <td>
+                                                    <?php if (!empty($car['gambar_mobil_overview'])): ?>
+                                                        <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" alt="Overview" class="img-thumbnail" style="max-height:150px; max-width: 250px; object-fit: cover;">
+                                                    <?php else: ?>
+                                                        <span class="text-muted">No Image</span>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td><?= htmlspecialchars($car['nama_mobil']) ?></td>
                                                 <td><?= htmlspecialchars($car['merek_mobil']) ?></td>
                                                 <td><?= htmlspecialchars($car['tipe_mobil']) ?></td>
@@ -74,6 +82,19 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                 <td><?= $car['stok_mobil'] ?></td>
                                                 <td><?= $car['tanggal_diperbaharui'] ?></td>
                                                 <td>
+                                                    <a href="#" class="btn btn-outline-primary btn-edit"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#updateCarModal"
+                                                       data-id="<?= $car['id_mobil'] ?>"
+                                                       data-nama="<?= htmlspecialchars($car['nama_mobil'], ENT_QUOTES) ?>"
+                                                       data-merek="<?= htmlspecialchars($car['merek_mobil'], ENT_QUOTES) ?>"
+                                                       data-tipe="<?= htmlspecialchars($car['tipe_mobil'], ENT_QUOTES) ?>"
+                                                       data-deskripsi="<?= htmlspecialchars($car['deskripsi_mobil'], ENT_QUOTES) ?>"
+                                                       data-harga="<?= $car['harga_mobil'] ?>"
+                                                       data-stok="<?= $car['stok_mobil'] ?>"
+                                                    >
+                                                        <i class="bi bi-pencil"></i> Edit
+                                                    </a>
                                                     <a href="#" class="btn btn-outline-danger">
                                                         <i class="bi bi-trash"></i> Delete
                                                     </a>
@@ -82,7 +103,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="8" class="text-center">No data available</td>
+                                            <td colspan="9" class="text-center">No data available</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>
@@ -95,6 +116,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 <!-- modal add car -->
                 <?php include('modal-add-mobil.php'); ?>
                 <!-- modal add car End-->
+                <!-- modal update car -->
+                <?php include('modal-update-mobil.php'); ?>
+                <!-- modal update car End-->
             </div>
         </div>
         <!-- Wrapper End -->
@@ -122,7 +146,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 var stok = button.data('stok');
 
                 var modal = $(this);
-                modal.find('#updateCarId').val(id);
+                modal.find('#id_mobil').val(id);
                 modal.find('#updateNamaMobil').val(nama);
                 modal.find('#updateMerekMobil').val(merek);
                 modal.find('#updateTipeMobil').val(tipe);
