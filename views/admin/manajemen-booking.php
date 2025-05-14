@@ -52,14 +52,24 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         <tbody>
                                             <?php
                                             require_once('../../connections/koneksi.php');
+                                            // Penjelasan inisial pada query SQL:
+                                            // t = tr_pembelian_mobil_tbl         (tabel transaksi pembelian mobil)
+                                            // b = dm_calon_buyer_tbl             (tabel data master calon buyer)
+                                            // m = dm_mobil_tbl                   (tabel data master mobil)
+
+                                            // Contoh pada query:
+                                            // FROM tr_pembelian_mobil_tbl t
+                                            // JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
+                                            // JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
 
                                             $q = mysqli_query($connection, "
-                                            SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
-                                            FROM tr_pembelian_mobil_tbl t
-                                            JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
-                                            JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
-                                            ORDER BY t.created_at DESC
-                                        ");
+                                                SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
+                                                FROM tr_pembelian_mobil_tbl t
+                                                JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
+                                                JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
+                                                WHERE t.status_transaksi != 'selesai'
+                                                ORDER BY t.created_at DESC
+                                            ");
                                             $no = 1;
                                             $modals = [];
                                             while ($row = mysqli_fetch_assoc($q)) {
