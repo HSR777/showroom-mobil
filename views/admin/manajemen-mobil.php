@@ -83,16 +83,15 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                 <td><?= $car['tanggal_diperbaharui'] ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-outline-primary btn-edit"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#updateCarModal"
-                                                       data-id="<?= $car['id_mobil'] ?>"
-                                                       data-nama="<?= htmlspecialchars($car['nama_mobil'], ENT_QUOTES) ?>"
-                                                       data-merek="<?= htmlspecialchars($car['merek_mobil'], ENT_QUOTES) ?>"
-                                                       data-tipe="<?= htmlspecialchars($car['tipe_mobil'], ENT_QUOTES) ?>"
-                                                       data-deskripsi="<?= htmlspecialchars($car['deskripsi_mobil'], ENT_QUOTES) ?>"
-                                                       data-harga="<?= $car['harga_mobil'] ?>"
-                                                       data-stok="<?= $car['stok_mobil'] ?>"
-                                                    >
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#updateCarModal"
+                                                        data-id="<?= $car['id_mobil'] ?>"
+                                                        data-nama="<?= htmlspecialchars($car['nama_mobil'], ENT_QUOTES) ?>"
+                                                        data-merek="<?= htmlspecialchars($car['merek_mobil'], ENT_QUOTES) ?>"
+                                                        data-tipe="<?= htmlspecialchars($car['tipe_mobil'], ENT_QUOTES) ?>"
+                                                        data-deskripsi="<?= htmlspecialchars($car['deskripsi_mobil'], ENT_QUOTES) ?>"
+                                                        data-harga="<?= $car['harga_mobil'] ?>"
+                                                        data-stok="<?= $car['stok_mobil'] ?>">
                                                         <i class="bi bi-pencil"></i> Edit
                                                     </a>
                                                     <a href="#" class="btn btn-outline-danger">

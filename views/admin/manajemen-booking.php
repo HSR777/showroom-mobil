@@ -26,6 +26,15 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
         <!-- Wrapper start -->
         <div class="wrapper-content col-10 container-fluid ps-5">
             <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <b>Manajemen Booking</b>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
                 <!-- card setting jadwal -->
                 <div class="col-auto card">
                     <div class="card-header">
