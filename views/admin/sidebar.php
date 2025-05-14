@@ -31,11 +31,11 @@
                 <i class="bi bi-car-front"></i> Manajemen mobil
             </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="bi bi-cash-stack"></i> Manajemen Transaksi
             </a>
-        </li>
+        </li> -->
     </ul>
     <!-- Groub 01 End -->
     <div class="mt-auto mb-3 text-center d-grid">
