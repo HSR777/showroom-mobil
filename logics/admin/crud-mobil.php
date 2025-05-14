@@ -89,4 +89,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
     exit();
 }
+
+// delete car data from the database
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'deleteCar' && isset($_GET['id'])) {
+    $id = (int)$_GET['id'];
+    // Optionally, delete images from server here if needed
+    $query = "DELETE FROM dm_mobil_tbl WHERE id_mobil = $id";
+    if (mysqli_query($connection, $query)) {
+        echo "<script>
+                alert('Car deleted successfully!');
+                window.location.href='../../views/admin/manajemen-mobil.php';
+              </script>";
+    } else {
+        echo "<script>
+                alert('Failed to delete car. Please try again.');
+                window.location.href='../../views/admin/manajemen-mobil.php';
+              </script>";
+    }
+    exit();
+}
 ?>

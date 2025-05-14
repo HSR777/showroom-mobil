@@ -33,6 +33,39 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                 <b>Manajemen Booking</b>
                             </h3>
                         </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Pemesan</th>
+                                        <th scope="col">Tanggal Booking</th>
+                                        <th scope="col">Waktu Booking</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Example data, replace with dynamic data from your database -->
+                                    <?php
+                                    $bookings = [
+                                        ['id' => 1, 'name' => 'John Doe', 'date' => '2023-10-01', 'time' => '10:00', 'status' => 'Confirmed'],
+                                        ['id' => 2, 'name' => 'Jane Smith', 'date' => '2023-10-02', 'time' => '11:00', 'status' => 'Pending'],
+                                    ];
+                                    foreach ($bookings as $index => $booking) {
+                                    ?>
+                                        <tr>
+                                            <td><?= $index + 1 ?></td>
+                                            <td><?= htmlspecialchars($booking['name']) ?></td>
+                                            <td><?= htmlspecialchars($booking['date']) ?></td>
+                                            <td><?= htmlspecialchars($booking['time']) ?></td>
+                                            <td><?= htmlspecialchars($booking['status']) ?></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- card setting jadwal -->

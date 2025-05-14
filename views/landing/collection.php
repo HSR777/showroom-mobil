@@ -144,7 +144,7 @@
                         <div class="col-6 col-md-4 col-lg-3">
                             <a href="detailmobil.php?id=<?= $car['id_mobil'] ?>" style="text-decoration: none; color: inherit;">
                                 <div class="card shadow h-100">
-                                    <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" class="card-img-top" alt="<?= htmlspecialchars($car['nama_mobil']) ?>" style="height: 200px; object-fit: contain;">
+                                    <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" class="card-img-top" alt="<?= htmlspecialchars($car['nama_mobil']) ?>" style="height: 200px; object-fit: cover;">
                                     <div class="card-footer d-flex align-items-center">
                                         <span class="me-2"><?= htmlspecialchars(ucfirst($car['merek_mobil'])) ?></span>
                                         <h6 class="mb-0"><b><?= htmlspecialchars($car['nama_mobil']) ?></b></h6>

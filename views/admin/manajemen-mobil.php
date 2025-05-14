@@ -70,7 +70,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                 <th scope="row" class="text-center"><?= $index + 1 ?></th>
                                                 <td>
                                                     <?php if (!empty($car['gambar_mobil_overview'])): ?>
-                                                        <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" alt="Overview" class="img-thumbnail" style="max-height:150px; max-width: 250px; object-fit: cover;">
+                                                        <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" alt="Overview" class="img-thumbnail" style="max-height: 100px; max-width: 150px; object-fit: cover;">
                                                     <?php else: ?>
                                                         <span class="text-muted">No Image</span>
                                                     <?php endif; ?>
@@ -94,7 +94,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                         data-stok="<?= $car['stok_mobil'] ?>">
                                                         <i class="bi bi-pencil"></i> Edit
                                                     </a>
-                                                    <a href="#" class="btn btn-outline-danger">
+                                                    <a href="#" class="btn btn-outline-danger btn-delete"
+                                                        data-id="<?= $car['id_mobil'] ?>">
                                                         <i class="bi bi-trash"></i> Delete
                                                     </a>
                                                 </td>
@@ -152,6 +153,15 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 modal.find('#updateDeskripsiMobil').val(deskripsi);
                 modal.find('#updateCarPrice').val(harga);
                 modal.find('#updateStokMobil').val(stok);
+            });
+
+            // Delete button handler
+            $('.btn-delete').on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                if (confirm('Are you sure you want to delete this car?')) {
+                    window.location.href = "../../logics/admin/crud-mobil.php?action=deleteCar&id=" + id;
+                }
             });
         });
     </script>
