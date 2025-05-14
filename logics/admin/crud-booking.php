@@ -11,8 +11,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
             $email = $_POST['buyer_email'];
             $name = $_POST['buyer_name'];
             $mobil = $_POST['mobil'];
+            // Ambil tanggal_jam_janjian dari database
+            $tanggal_jam_janjian = null;
+            $res = mysqli_query($connection, "SELECT tanggal_jam_janjian FROM tr_pembelian_mobil_tbl WHERE id_transaksi=$id LIMIT 1");
+            if ($row = mysqli_fetch_assoc($res)) {
+                $tanggal_jam_janjian = $row['tanggal_jam_janjian'];
+            }
             include_once('mailer.php');
-            send_on_going_email($email, $name, $mobil);
+            send_on_going_email($email, $name, $mobil, $tanggal_jam_janjian);
         }
         header("Location: ../../views/admin/manajemen-booking.php?status=sukses");
     } else {
