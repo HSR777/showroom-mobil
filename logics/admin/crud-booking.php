@@ -6,6 +6,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $status = mysqli_real_escape_string($connection, $_POST['status_transaksi']);
     $q = mysqli_query($connection, "UPDATE tr_pembelian_mobil_tbl SET status_transaksi='$status', updated_at=NOW() WHERE id_transaksi=$id");
     if ($q) {
+        // Kurangi stok mobil jika status selesai
+        if ($status === 'selesai') {
+            // Ambil id_mobil dan stok_dibeli dari transaksi
+            $res = mysqli_query($connection, "SELECT id_mobil, stok_dibeli FROM tr_pembelian_mobil_tbl WHERE id_transaksi=$id LIMIT 1");
+            if ($row = mysqli_fetch_assoc($res)) {
+                $id_mobil = (int)$row['id_mobil'];
+                $stok_dibeli = (int)$row['stok_dibeli'];
+                // Kurangi stok mobil
+                mysqli_query($connection, "UPDATE dm_mobil_tbl SET stok_mobil = GREATEST(stok_mobil - $stok_dibeli, 0) WHERE id_mobil = $id_mobil");
+            }
+        }
         // Kirim email jika status on-going
         if ($status === 'on-going' && !empty($_POST['buyer_email'])) {
             $email = $_POST['buyer_email'];
