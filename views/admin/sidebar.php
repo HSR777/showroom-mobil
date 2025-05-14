@@ -17,18 +17,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="manajemen-mobil.php">
-                <i class="bi bi-car-front"></i> Manajemen mobil
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="manajemen-booking.php">
                 <i class="bi bi-calendar-check"></i> Manajemen Booking
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-envelope"></i> Manajemen Email
+            <a class="nav-link" href="manajemen-buyer.php">
+                <i class="bi bi-people"></i> Manajemen Buyer
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="manajemen-mobil.php">
+                <i class="bi bi-car-front"></i> Manajemen mobil
             </a>
         </li>
         <li class="nav-item">

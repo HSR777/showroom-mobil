@@ -43,25 +43,77 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                             <th scope="col">Tanggal Booking</th>
                                             <th scope="col">Waktu Booking</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Example data, replace with dynamic data from your database -->
                                         <?php
-                                        $bookings = [
-                                            ['id' => 1, 'name' => 'John Doe', 'date' => '2023-10-01', 'time' => '10:00', 'status' => 'Confirmed'],
-                                            ['id' => 2, 'name' => 'Jane Smith', 'date' => '2023-10-02', 'time' => '11:00', 'status' => 'Pending'],
-                                        ];
-                                        foreach ($bookings as $index => $booking) {
-                                        ?>
-                                            <tr>
-                                                <td><?= $index + 1 ?></td>
-                                                <td><?= htmlspecialchars($booking['name']) ?></td>
-                                                <td><?= htmlspecialchars($booking['date']) ?></td>
-                                                <td><?= htmlspecialchars($booking['time']) ?></td>
-                                                <td><?= htmlspecialchars($booking['status']) ?></td>
-                                            </tr>
-                                        <?php
+                                        require_once('../../connections/koneksi.php');
+                                        $q = mysqli_query($connection, "
+                                            SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
+                                            FROM tr_pembelian_mobil_tbl t
+                                            JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
+                                            JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
+                                            ORDER BY t.created_at DESC
+                                        ");
+                                        $no = 1;
+                                        while ($row = mysqli_fetch_assoc($q)) {
+                                            $nama = htmlspecialchars($row['nama_depan_calon_buyer'].' '.$row['nama_belakang_calon_buyer']);
+                                            $tanggal = htmlspecialchars($row['tanggal_jam_janjian']);
+                                            $waktu = date('H:i', strtotime($row['tanggal_jam_janjian']));
+                                            $status = htmlspecialchars($row['status_transaksi']);
+                                            $id_transaksi = $row['id_transaksi'];
+                                            // Data untuk modal
+                                            $modal_data = [
+                                                'Nama Pemesan' => $nama,
+                                                'Email' => htmlspecialchars($row['email_calon_buyer']),
+                                                'No Telepon' => htmlspecialchars($row['nomor_telepon_calon_buyer']),
+                                                'Mobil' => htmlspecialchars($row['nama_mobil']),
+                                                'Tanggal Booking' => $tanggal,
+                                                'Waktu Booking' => $waktu,
+                                                'Status' => $status,
+                                                'Harga Deal' => 'Rp. ' . number_format($row['harga_deal'], 0, ',', '.'),
+                                                'Tanggal Transaksi' => htmlspecialchars($row['tanggal_transaksi']),
+                                            ];
+                                            echo "<tr>
+                                                <td>{$no}</td>
+                                                <td>{$nama}</td>
+                                                <td>{$tanggal}</td>
+                                                <td>{$waktu}</td>
+                                                <td>{$status}</td>
+                                                <td>
+                                                    <button class='btn btn-info btn-sm' data-bs-toggle='modal' data-bs-target='#detailModal{$id_transaksi}'>Detail</button>
+                                                    <button class='btn btn-success btn-sm' onclick='handleSimpan({$id_transaksi})'>Simpan</button>
+                                                </td>
+                                            </tr>";
+
+                                            // Modal detail
+                                            echo "
+                                            <div class='modal fade' id='detailModal{$id_transaksi}' tabindex='-1' aria-labelledby='detailModalLabel{$id_transaksi}' aria-hidden='true'>
+                                              <div class='modal-dialog'>
+                                                <div class='modal-content'>
+                                                  <div class='modal-header'>
+                                                    <h5 class='modal-title' id='detailModalLabel{$id_transaksi}'>Detail Booking</h5>
+                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                  </div>
+                                                  <div class='modal-body'>
+                                                    <ul class='list-group'>";
+                                            foreach ($modal_data as $label => $value) {
+                                                echo "<li class='list-group-item d-flex justify-content-between align-items-center'>
+                                                        <span>{$label}</span>
+                                                        <span>{$value}</span>
+                                                      </li>";
+                                            }
+                                            echo "    </ul>
+                                                  </div>
+                                                  <div class='modal-footer'>
+                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tutup</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            ";
+                                            $no++;
                                         }
                                         ?>
                                     </tbody>
@@ -139,6 +191,14 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function handleSimpan(id) {
+        // Ganti dengan AJAX jika ingin update status tanpa reload
+        if(confirm('Tandai booking ini sebagai selesai?')) {
+            window.location.href = '../../logics/admin/crud-booking.php?action=simpan&id=' + id;
+        }
+    }
+    </script>
 </body>
 
 </html>

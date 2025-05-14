@@ -8,6 +8,45 @@ if ($id > 0) {
         $car = mysqli_fetch_assoc($result);
     }
 }
+
+// Ambil jadwal dari database
+$jadwal = [];
+$qjadwal = mysqli_query($connection, "SELECT * FROM dm_jadwal_tbl");
+while ($row = mysqli_fetch_assoc($qjadwal)) {
+    $jadwal[$row['hari_jadwal']] = [
+        'jam_buka' => $row['jam_buka'],
+        'jam_tutup' => $row['jam_tutup']
+    ];
+}
+
+// Helper: mapping hari angka ke nama hari (Bahasa Indonesia)
+function hariIndo($date) {
+    $hari = [
+        'Sunday' => 'minggu',
+        'Monday' => 'senin',
+        'Tuesday' => 'selasa',
+        'Wednesday' => 'rabu',
+        'Thursday' => 'kamis',
+        'Friday' => 'jumat',
+        'Saturday' => 'sabtu'
+    ];
+    return $hari[date('l', strtotime($date))];
+}
+
+// Generate tanggal 7 hari ke depan
+$tanggal_opsi = [];
+for ($i = 0; $i < 7; $i++) {
+    $tgl = date('Y-m-d', strtotime("+$i day"));
+    $hari = hariIndo($tgl);
+    if (isset($jadwal[$hari])) {
+        $tanggal_opsi[] = [
+            'tanggal' => $tgl,
+            'hari' => $hari,
+            'jam_buka' => $jadwal[$hari]['jam_buka'],
+            'jam_tutup' => $jadwal[$hari]['jam_tutup']
+        ];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,14 +110,6 @@ if ($id > 0) {
                                         <?= nl2br(htmlspecialchars($car['deskripsi_mobil'])) ?>
                                     </p>
                                     <ul class="list-unstyled text-start mx-auto" style="max-width:400px;">
-                                        <!-- <li class="mb-2">
-                                            <i class="bi bi-car-front-fill text-primary me-2"></i>
-                                            <b>Type:</b> <?= htmlspecialchars(ucfirst($car['tipe_mobil'])) ?>
-                                        </li> -->
-                                        <!-- <li class="mb-2">
-                                            <i class="bi bi-box-seam text-success me-2"></i>
-                                            <b>Stock:</b> <?= htmlspecialchars($car['stok_mobil']) ?>
-                                        </li> -->
                                         <li class="mb-2">
                                             <h5>
                                                 <i class="bi bi-cash-stack text-success me-2"></i>
@@ -115,6 +146,7 @@ if ($id > 0) {
 
             <!-- Form -->
             <form action="submit_schedule.php" method="post">
+                <input type="hidden" name="id_mobil" value="<?= $car ? $car['id_mobil'] : '' ?>">
                 <div class="row gx-4 gy-3">
                     <!-- Kolom kiri -->
                     <div class="col-md-6">
@@ -127,8 +159,14 @@ if ($id > 0) {
                         <div class="mb-3">
                             <select id="date" name="date" class="form-select border-0 border-bottom rounded-0" required>
                                 <option value="" disabled selected>Pilih tanggal</option>
-                                <option>2025-01-01</option>
-                                <option>2025-01-02</option>
+                                <?php foreach ($tanggal_opsi as $tgl): ?>
+                                    <option value="<?= $tgl['tanggal'] ?>"
+                                        data-hari="<?= $tgl['hari'] ?>"
+                                        data-jam-buka="<?= $tgl['jam_buka'] ?>"
+                                        data-jam-tutup="<?= $tgl['jam_tutup'] ?>">
+                                        <?= date('l, d M Y', strtotime($tgl['tanggal'])) ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -144,8 +182,7 @@ if ($id > 0) {
                         <div class="mb-3">
                             <select id="time" name="time" class="form-select border-0 border-bottom rounded-0" required>
                                 <option value="" disabled selected>Pilih jam</option>
-                                <option>09:00</option>
-                                <option>10:00</option>
+                                <!-- Opsi jam akan diisi oleh JS -->
                             </select>
                         </div>
                     </div>
@@ -170,6 +207,33 @@ if ($id > 0) {
     </footer>
     <!-- End Footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // --- JAM BOOKING DYNAMIC ---
+    // Helper: generate time options per 1 jam interval
+    function generateTimeOptions(jamBuka, jamTutup) {
+        let options = '<option value="" disabled selected>Pilih jam</option>';
+        if (!jamBuka || !jamTutup) return options;
+        let [hBuka, mBuka] = jamBuka.split(':').map(Number);
+        let [hTutup, mTutup] = jamTutup.split(':').map(Number);
+        let start = new Date(0,0,0,hBuka,mBuka,0);
+        let end = new Date(0,0,0,hTutup,mTutup,0);
+        while (start < end) {
+            let jam = start.getHours().toString().padStart(2,'0') + ':' + start.getMinutes().toString().padStart(2,'0');
+            options += `<option value="${jam}">${jam}</option>`;
+            start.setHours(start.getHours() + 1);
+        }
+        return options;
+    }
+
+    document.getElementById('date').addEventListener('change', function() {
+        let selected = this.options[this.selectedIndex];
+        let jamBuka = selected.getAttribute('data-jam-buka');
+        let jamTutup = selected.getAttribute('data-jam-tutup');
+        let timeSelect = document.getElementById('time');
+        timeSelect.innerHTML = generateTimeOptions(jamBuka, jamTutup);
+        timeSelect.disabled = false;
+    });
+    </script>
 </body>
 
 </html>
