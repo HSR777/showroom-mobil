@@ -272,129 +272,129 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // --- FILTERING LOGIC ---
-        const itemsPerPage = 16;
-        let currentPage = 1;
-        let currentBrand = "all";
-        let currentType = "all";
-        let currentSearch = "";
+        const itemsPerPage = 8; // Number of car cards per page
+        let currentPage = 1; // Current pagination page
+        let currentBrand = "all"; // Currently selected brand filter
+        let currentType = "all"; // Currently selected type filter
+        let currentSearch = ""; // Current search query
 
-        const carCards = Array.from(document.querySelectorAll('.car-card'));
-        const pagination = document.querySelector('.pagination');
-        const brandLinks = document.querySelectorAll('.brand-filter');
-        const typeRadios = document.querySelectorAll('.type-filter');
-        const searchInput = document.getElementById('searchInput');
+        const carCards = Array.from(document.querySelectorAll('.car-card')); // All car card elements
+        const pagination = document.querySelector('.pagination'); // Pagination container
+        const brandLinks = document.querySelectorAll('.brand-filter'); // Brand filter buttons
+        const typeRadios = document.querySelectorAll('.type-filter'); // Type radio filters
+        const searchInput = document.getElementById('searchInput'); // Search input field
 
         // Helper: filter cars based on current filters
-        function getFilteredCars() {
-            return carCards.filter(card => {
-                const brand = card.getAttribute('data-brand');
-                const type = card.getAttribute('data-type');
-                const name = card.getAttribute('data-name');
-                let brandMatch = (currentBrand === "all") || (brand === currentBrand);
-                let typeMatch = (currentType === "all") || (type === currentType);
-                let searchMatch = (currentSearch === "") || (name.includes(currentSearch));
-                return brandMatch && typeMatch && searchMatch;
+        function getFilteredCars() { // Returns filtered car cards based on current filters
+            return carCards.filter(card => { // Filter each car card
+            const brand = card.getAttribute('data-brand'); // Get brand from data attribute
+            const type = card.getAttribute('data-type'); // Get type from data attribute
+            const name = card.getAttribute('data-name'); // Get name from data attribute
+            let brandMatch = (currentBrand === "all") || (brand === currentBrand); // Match brand or 'all'
+            let typeMatch = (currentType === "all") || (type === currentType); // Match type or 'all'
+            let searchMatch = (currentSearch === "") || (name.includes(currentSearch)); // Match search or empty
+            return brandMatch && typeMatch && searchMatch; // Return true if all match
             });
         }
 
         // Show/hide cards based on filter and pagination
-        function updateVisibleCards() {
-            const filtered = getFilteredCars();
-            carCards.forEach(card => card.style.display = "none");
-            filtered.forEach((card, idx) => {
-                card.style.display = (idx >= (currentPage - 1) * itemsPerPage && idx < currentPage * itemsPerPage) ? "block" : "none";
+        function updateVisibleCards() { // Update which car cards are visible based on filters and pagination
+            const filtered = getFilteredCars(); // Get filtered car cards
+            carCards.forEach(card => card.style.display = "none"); // Hide all cards
+            filtered.forEach((card, idx) => { // Show only cards for current page
+            card.style.display = (idx >= (currentPage - 1) * itemsPerPage && idx < currentPage * itemsPerPage) ? "block" : "none"; // Show if in page range
             });
         }
 
         // Render pagination for filtered results
         function renderPagination() {
-            const filtered = getFilteredCars();
-            const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
-            pagination.innerHTML = "";
+            const filtered = getFilteredCars(); // Get filtered car cards
+            const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1; // Calculate total pages
+            pagination.innerHTML = ""; // Clear pagination
 
             // Prev
-            const prevLi = document.createElement("li");
-            prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : "");
-            prevLi.innerHTML = `<a class="page-link rounded-circle" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`;
-            prevLi.addEventListener("click", function(e) {
-                e.preventDefault();
-                if (currentPage > 1) {
-                    currentPage--;
-                    updateVisibleCards();
-                    renderPagination();
-                }
+            const prevLi = document.createElement("li"); // Create previous button
+            prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : ""); // Disable if on first page
+            prevLi.innerHTML = `<a class="page-link rounded-circle" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`; // Set inner HTML
+            prevLi.addEventListener("click", function(e) { // Add click event
+            e.preventDefault();
+            if (currentPage > 1) { // Go to previous page if not first
+                currentPage--;
+                updateVisibleCards();
+                renderPagination();
+            }
             });
-            pagination.appendChild(prevLi);
+            pagination.appendChild(prevLi); // Add to pagination
 
             // Page numbers
-            for (let i = 1; i <= totalPages; i++) {
-                const li = document.createElement("li");
-                li.className = "page-item" + (i === currentPage ? " active" : "");
-                li.innerHTML = `<a class="page-link rounded-circle hover-primary" href="#">${i}</a>`;
-                li.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    currentPage = i;
-                    updateVisibleCards();
-                    renderPagination();
-                });
-                pagination.appendChild(li);
+            for (let i = 1; i <= totalPages; i++) { // Loop through pages
+            const li = document.createElement("li"); // Create page number button
+            li.className = "page-item" + (i === currentPage ? " active" : ""); // Mark active page
+            li.innerHTML = `<a class="page-link rounded-circle hover-primary" href="#">${i}</a>`; // Set inner HTML
+            li.addEventListener("click", function(e) { // Add click event
+                e.preventDefault();
+                currentPage = i; // Set current page
+                updateVisibleCards();
+                renderPagination();
+            });
+            pagination.appendChild(li); // Add to pagination
             }
 
             // Next
-            const nextLi = document.createElement("li");
-            nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
-            nextLi.innerHTML = `<a class="page-link rounded-circle" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`;
-            nextLi.addEventListener("click", function(e) {
-                e.preventDefault();
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    updateVisibleCards();
-                    renderPagination();
-                }
+            const nextLi = document.createElement("li"); // Create next button
+            nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : ""); // Disable if on last page
+            nextLi.innerHTML = `<a class="page-link rounded-circle" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`; // Set inner HTML
+            nextLi.addEventListener("click", function(e) { // Add click event
+            e.preventDefault();
+            if (currentPage < totalPages) { // Go to next page if not last
+                currentPage++;
+                updateVisibleCards();
+                renderPagination();
+            }
             });
-            pagination.appendChild(nextLi);
+            pagination.appendChild(nextLi); // Add to pagination
         }
 
         // --- EVENT HANDLERS ---
 
         // Brand filter
-        brandLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                brandLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                currentBrand = this.getAttribute('data-brand');
-                currentPage = 1;
-                updateVisibleCards();
-                renderPagination();
+        brandLinks.forEach(link => { // Brand filter event
+            link.addEventListener('click', function(e) { // On brand filter click
+            e.preventDefault(); // Prevent default link
+            brandLinks.forEach(l => l.classList.remove('active')); // Remove active from all
+            this.classList.add('active'); // Add active to clicked
+            currentBrand = this.getAttribute('data-brand'); // Set current brand
+            currentPage = 1; // Reset to first page
+            updateVisibleCards(); // Update visible cards
+            renderPagination(); // Update pagination
             });
         });
 
         // Type filter
-        typeRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                currentType = this.value;
-                currentPage = 1;
-                updateVisibleCards();
-                renderPagination();
+        typeRadios.forEach(radio => { // Type radio event
+            radio.addEventListener('change', function() { // On type change
+            currentType = this.value; // Set current type
+            currentPage = 1; // Reset to first page
+            updateVisibleCards(); // Update visible cards
+            renderPagination(); // Update pagination
             });
         });
 
         // Search filter
-        searchInput.addEventListener('input', function() {
-            currentSearch = this.value.trim().toLowerCase();
-            currentPage = 1;
-            updateVisibleCards();
-            renderPagination();
+        searchInput.addEventListener('input', function() { // On search input
+            currentSearch = this.value.trim().toLowerCase(); // Set search query
+            currentPage = 1; // Reset to first page
+            updateVisibleCards(); // Update visible cards
+            renderPagination(); // Update pagination
         });
 
         // --- INITIALIZE ---
         // Set initial type filter from checked radio
-        const checkedType = document.querySelector('.type-filter:checked');
-        if (checkedType) currentType = checkedType.value;
+        const checkedType = document.querySelector('.type-filter:checked'); // Get checked type
+        if (checkedType) currentType = checkedType.value; // Set if exists
 
-        updateVisibleCards();
-        renderPagination();
+        updateVisibleCards(); // Initial card update
+        renderPagination(); // Initial pagination
     </script>
 
 </body>
