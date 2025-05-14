@@ -47,24 +47,39 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                    require_once('../../connections/koneksi.php');
+                                    $q = mysqli_query($connection, "
+                                        SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
+                                        FROM tr_pembelian_mobil_tbl t
+                                        JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
+                                        JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
+                                        ORDER BY t.created_at DESC
+                                    ");
+                                    $no = 1;
+                                    $modals = [];
+                                    while ($row = mysqli_fetch_assoc($q)) {
+                                        $nama = htmlspecialchars($row['nama_depan_calon_buyer'].' '.$row['nama_belakang_calon_buyer']);
+                                        $tanggal = htmlspecialchars($row['tanggal_jam_janjian']);
+                                        $waktu = date('H:i', strtotime($row['tanggal_jam_janjian']));
+                                        $status = htmlspecialchars($row['status_transaksi']);
+                                        $id_transaksi = $row['id_transaksi'];
+                                        ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $nama ?></td>
+                                            <td><?= $tanggal ?></td>
+                                            <td><?= $waktu ?></td>
+                                            <td><?= $status ?></td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal<?= $id_transaksi ?>">Detail</button>
+                                                <button class="btn btn-success btn-sm" onclick="handleSimpan(<?= $id_transaksi ?>)">Simpan</button>
+                                            </td>
+                                        </tr>
                                         <?php
-                                        require_once('../../connections/koneksi.php');
-                                        $q = mysqli_query($connection, "
-                                            SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
-                                            FROM tr_pembelian_mobil_tbl t
-                                            JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
-                                            JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
-                                            ORDER BY t.created_at DESC
-                                        ");
-                                        $no = 1;
-                                        while ($row = mysqli_fetch_assoc($q)) {
-                                            $nama = htmlspecialchars($row['nama_depan_calon_buyer'].' '.$row['nama_belakang_calon_buyer']);
-                                            $tanggal = htmlspecialchars($row['tanggal_jam_janjian']);
-                                            $waktu = date('H:i', strtotime($row['tanggal_jam_janjian']));
-                                            $status = htmlspecialchars($row['status_transaksi']);
-                                            $id_transaksi = $row['id_transaksi'];
-                                            // Data untuk modal
-                                            $modal_data = [
+                                        $modals[] = [
+                                            'id' => $id_transaksi,
+                                            'data' => [
                                                 'Nama Pemesan' => $nama,
                                                 'Email' => htmlspecialchars($row['email_calon_buyer']),
                                                 'No Telepon' => htmlspecialchars($row['nomor_telepon_calon_buyer']),
@@ -74,50 +89,39 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                 'Status' => $status,
                                                 'Harga Deal' => 'Rp. ' . number_format($row['harga_deal'], 0, ',', '.'),
                                                 'Tanggal Transaksi' => htmlspecialchars($row['tanggal_transaksi']),
-                                            ];
-                                            echo "<tr>
-                                                <td>{$no}</td>
-                                                <td>{$nama}</td>
-                                                <td>{$tanggal}</td>
-                                                <td>{$waktu}</td>
-                                                <td>{$status}</td>
-                                                <td>
-                                                    <button class='btn btn-info btn-sm' data-bs-toggle='modal' data-bs-target='#detailModal{$id_transaksi}'>Detail</button>
-                                                    <button class='btn btn-success btn-sm' onclick='handleSimpan({$id_transaksi})'>Simpan</button>
-                                                </td>
-                                            </tr>";
-
-                                            // Modal detail
-                                            echo "
-                                            <div class='modal fade' id='detailModal{$id_transaksi}' tabindex='-1' aria-labelledby='detailModalLabel{$id_transaksi}' aria-hidden='true'>
-                                              <div class='modal-dialog'>
-                                                <div class='modal-content'>
-                                                  <div class='modal-header'>
-                                                    <h5 class='modal-title' id='detailModalLabel{$id_transaksi}'>Detail Booking</h5>
-                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                  </div>
-                                                  <div class='modal-body'>
-                                                    <ul class='list-group'>";
-                                            foreach ($modal_data as $label => $value) {
-                                                echo "<li class='list-group-item d-flex justify-content-between align-items-center'>
-                                                        <span>{$label}</span>
-                                                        <span>{$value}</span>
-                                                      </li>";
-                                            }
-                                            echo "    </ul>
-                                                  </div>
-                                                  <div class='modal-footer'>
-                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tutup</button>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            ";
-                                            $no++;
-                                        }
-                                        ?>
+                                            ]
+                                        ];
+                                        $no++;
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
+                                <!-- Render all modals after table -->
+                                <?php foreach ($modals as $modal): ?>
+                                <div class="modal fade" id="detailModal<?= $modal['id'] ?>" tabindex="-1" aria-labelledby="detailModalLabel<?= $modal['id'] ?>" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="detailModalLabel<?= $modal['id'] ?>">Detail Booking</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <ul class="list-group">
+                                          <?php foreach ($modal['data'] as $label => $value): ?>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                              <span><?= $label ?></span>
+                                              <span><?= $value ?></span>
+                                            </li>
+                                          <?php endforeach; ?>
+                                        </ul>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
