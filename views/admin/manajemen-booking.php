@@ -34,44 +34,50 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                             </h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama Pemesan</th>
-                                        <th scope="col">Tanggal Booking</th>
-                                        <th scope="col">Waktu Booking</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Example data, replace with dynamic data from your database -->
-                                    <?php
-                                    $bookings = [
-                                        ['id' => 1, 'name' => 'John Doe', 'date' => '2023-10-01', 'time' => '10:00', 'status' => 'Confirmed'],
-                                        ['id' => 2, 'name' => 'Jane Smith', 'date' => '2023-10-02', 'time' => '11:00', 'status' => 'Pending'],
-                                    ];
-                                    foreach ($bookings as $index => $booking) {
-                                    ?>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1 ?></td>
-                                            <td><?= htmlspecialchars($booking['name']) ?></td>
-                                            <td><?= htmlspecialchars($booking['date']) ?></td>
-                                            <td><?= htmlspecialchars($booking['time']) ?></td>
-                                            <td><?= htmlspecialchars($booking['status']) ?></td>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Nama Pemesan</th>
+                                            <th scope="col">Tanggal Booking</th>
+                                            <th scope="col">Waktu Booking</th>
+                                            <th scope="col">Status</th>
                                         </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Example data, replace with dynamic data from your database -->
+                                        <?php
+                                        $bookings = [
+                                            ['id' => 1, 'name' => 'John Doe', 'date' => '2023-10-01', 'time' => '10:00', 'status' => 'Confirmed'],
+                                            ['id' => 2, 'name' => 'Jane Smith', 'date' => '2023-10-02', 'time' => '11:00', 'status' => 'Pending'],
+                                        ];
+                                        foreach ($bookings as $index => $booking) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $index + 1 ?></td>
+                                                <td><?= htmlspecialchars($booking['name']) ?></td>
+                                                <td><?= htmlspecialchars($booking['date']) ?></td>
+                                                <td><?= htmlspecialchars($booking['time']) ?></td>
+                                                <td><?= htmlspecialchars($booking['status']) ?></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- card setting jadwal -->
-                <div class="col-auto card">
+                <div class="col-auto card p-0">
                     <div class="card-header">
-                        <h5>Pengaturan Jadwal</h5>
+                        <h3 class="fw-bold">
+                            <i class="bi bi-gear"></i> Pengaturan Jadwal
+                        </h3>
+                        <!-- Bootstrap Icons CDN -->
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
                     </div>
                     <div class="card-body">
                         <?php
@@ -115,7 +121,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                             <?php
                             }
                             ?>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <div class="card-footer m-0">
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="bi bi-save"></i> Simpan
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

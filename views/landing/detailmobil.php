@@ -43,7 +43,9 @@ if ($id > 0) {
                                 <p class="text-white mb-4" style="text-shadow: 2px 2px #000; font-size: 1.8rem;">
                                     <?= htmlspecialchars(ucfirst($car['merek_mobil'])) ?>
                                 </p>
-                                <button type="button" class="btn btn-primary btn-lg w-100 w-lg-30" onclick="document.getElementById('form-booking').scrollIntoView({ behavior: 'smooth' });">Enquire</button>
+                                <button type="button" class="btn btn-primary btn-lg w-100 w-lg-30 px-5" onclick="document.getElementById('form-booking').scrollIntoView({ behavior: 'smooth' });">
+                                    Enquire <i class="bi bi-arrow-down-circle ms-2"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -60,13 +62,32 @@ if ($id > 0) {
                 <div class="row g-0 align-items-center">
                     <div class="col-md-6">
                         <div class="p-4">
-                            <h2><b>Overview</b></h2>
-                            <p><?= nl2br(htmlspecialchars($car['deskripsi_mobil'])) ?></p>
-                            <ul class="list-unstyled text-start mx-auto" style="max-width:400px;">
-                                <li><b>Type:</b> <?= htmlspecialchars(ucfirst($car['tipe_mobil'])) ?></li>
-                                <li><b>Stock:</b> <?= htmlspecialchars($car['stok_mobil']) ?></li>
-                                <li><b>Price:</b> Rp. <?= number_format($car['harga_mobil'], 0, ',', '.') ?></li>
-                            </ul>
+                            <div class="card border-0" style="background: rgba(255,255,255,0.92);">
+                                <div class="card-body">
+                                    <h2 class="mb-3" style="font-family: 'Cinzel', serif; color: #2c3e50;">
+                                        <b><i class="bi bi-info-circle me-2"></i>Overview</b>
+                                    </h2>
+                                    <p class="mb-4 text-justify" style="font-size: 1.1rem; color: #444; text-align: justify;">
+                                        <?= nl2br(htmlspecialchars($car['deskripsi_mobil'])) ?>
+                                    </p>
+                                    <ul class="list-unstyled text-start mx-auto" style="max-width:400px;">
+                                        <!-- <li class="mb-2">
+                                            <i class="bi bi-car-front-fill text-primary me-2"></i>
+                                            <b>Type:</b> <?= htmlspecialchars(ucfirst($car['tipe_mobil'])) ?>
+                                        </li> -->
+                                        <!-- <li class="mb-2">
+                                            <i class="bi bi-box-seam text-success me-2"></i>
+                                            <b>Stock:</b> <?= htmlspecialchars($car['stok_mobil']) ?>
+                                        </li> -->
+                                        <li class="mb-2">
+                                            <h5>
+                                                <i class="bi bi-cash-stack text-success me-2"></i>
+                                                <b>Price:</b> <span style="color:#27ae60;">Rp. <?= number_format($car['harga_mobil'], 0, ',', '.') ?></span>
+                                            </h5>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 p-0">

@@ -96,7 +96,7 @@
     </div>
 
     <!-- brand filter -->
-    <div class="row g-2 mb-3 brand-filter-row">
+    <div class="row g-2 mb-3 brand-filter-row px-5">
         <!-- card 01 -->
         <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
             <a href="#" data-brand="all" class="card shadow brand-filter justify-content-center align-items-center text-center active" style="text-decoration: none;">
@@ -145,20 +145,23 @@
     <hr style="border: 2px solid black;">
 
     <!-- search -->
-    <div class="mt-4 p-5">
-        <div class="input-group shadow">
-            <span class="input-group-text"><i class="bi bi-search"></i></span>
-            <input class="form-control" id="searchInput" placeholder="Cari Nama Mobil">
+    <div class="m-5">
+        <div class="input-group">
+            <span class="input-group-text bg-white border-end-0 rounded-start-pill" style="padding: 2rem;">
+                <i class="bi bi-search"></i>
+            </span>
+            <input class="form-control border-start-0 rounded-end-pill"
+                id="searchInput" placeholder="Cari Nama Mobil" style="border-left: none; font-size: medium;">
         </div>
     </div>
     <!--  -->
 
-    <div class="container py-5">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row m-5">
             <!-- Sidebar Filter -->
-            <div class="col-12 col-md-3 mb-4">
-                <h5 class="mb-2 fw-bold">Filter</h5>
-                <hr class="w-25 mb-4">
+            <div class="col-6 col-md-3 mb-3">
+                <h5 class="mb-2 fw-bold text-center">Filter</h5>
+                <hr class="w-100 mb-4">
 
                 <div class="form-check mb-2">
                     <input class="form-check-input type-filter" type="radio" name="radioDefault" id="radioDefault0" value="all" checked>
@@ -193,7 +196,7 @@
             </div>
 
             <!-- Cars list Cards -->
-            <div class="col-12 col-md-9">
+            <div class="col-6 col-md-9">
                 <div class="row g-3" id="carsContainer">
                     <?php
                     include('../../connections/koneksi.php');
