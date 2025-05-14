@@ -27,9 +27,47 @@
     /* Blue glow for active brand filter */
     .brand-filter.active,
     .brand-filter.active:focus {
-        box-shadow: 0 0 0 4px #0d6efd66, 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 0 0 4px #0d6efd66, 0 2px 8px rgba(0, 0, 0, 0.08);
         border: 2px solid #0d6efd;
         z-index: 1;
+    }
+
+    /* Full width brand filter buttons */
+    .brand-filter-row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        gap: 12px 0;
+    }
+    .brand-filter {
+        width: 100%;
+        min-width: 0;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        height: 100%;
+    }
+    .brand-filter .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        min-height: 100px;
+        /* Ensures all cards have the same height */
+    }
+    @media (min-width: 768px) {
+        .brand-filter .card-body {
+            height: 120px;
+            min-height: 120px;
+        }
+    }
+    /* Make brand filter images smaller */
+    .brand-filter .partner-logo {
+        max-height: 100px;
+        width: auto;
+        margin: 0 auto;
+        display: block;
     }
 </style>
 
@@ -54,38 +92,50 @@
     </div>
 
     <!-- brand filter -->
-    <div class="row px-5" id="brandFilter">
+    <div class="row g-2 mb-3 brand-filter-row">
         <!-- card 01 -->
-         <a href="#" data-brand="all" class="col me-2 card shadow brand-filter active">
-             <div class="card-body justyfy-content-center align-items-center text-center d-flex">
-                 <h1>All</h1>
-             </div>
-         </a>
-        <a href="#" data-brand="lamborghini" class="col me-2 card shadow brand-filter">
-            <div class="card-body">
-            <img src="../../img/lambologo.png" class="card-img-top partner-logo" alt="...">
-            </div>
-        </a>
-        <a href="#" data-brand="bmw" class="col me-2 card shadow brand-filter">
-            <div class="card-body">
-            <img src="../../img/bmwlogo.png" class="card-img-top partner-logo" alt="...">
-            </div>
-        </a>
-        <a href="#" data-brand="mercedes" class="col me-2 card shadow brand-filter">
-            <div class="card-body">
-            <img src="../../img/merchedeslogo.png" class="card-img-top partner-logo" alt="...">
-            </div>
-        </a>
-        <a href="#" data-brand="porsche" class="col me-2 card shadow brand-filter">
-            <div class="card-body">
-            <img src="../../img/porschelogo.png" class="card-img-top partner-logo" alt="...">
-            </div>
-        </a>
-        <a href="#" data-brand="ferrari" class="col card shadow brand-filter">
-            <div class="card-body">
-            <img src="../../img/ferarrilogo.png" class="card-img-top partner-logo" alt="...">
-            </div>
-        </a>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <a href="#" data-brand="all" class="card shadow brand-filter justify-content-center align-items-center text-center active" style="text-decoration: none;">
+                <div class="card-body justify-content-center align-items-center text-center d-flex">
+                    <h1 class="text-dark">All</h1>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <a href="#" data-brand="lamborghini" class="card shadow brand-filter justify-content-center align-items-center text-center">
+                <div class="card-body">
+                    <img src="../../img/lambologo.png" class="card-img-top partner-logo" alt="...">
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <a href="#" data-brand="bmw" class="card shadow brand-filter justify-content-center align-items-center text-center">
+                <div class="card-body">
+                    <img src="../../img/bmwlogo.png" class="card-img-top partner-logo" alt="...">
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <a href="#" data-brand="mercedes" class="card shadow brand-filter justify-content-center align-items-center text-center">
+                <div class="card-body">
+                    <img src="../../img/merchedeslogo.png" class="card-img-top partner-logo" alt="...">
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <a href="#" data-brand="porsche" class="card shadow brand-filter justify-content-center align-items-center text-center">
+                <div class="card-body">
+                    <img src="../../img/porschelogo.png" class="card-img-top partner-logo" alt="...">
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex">
+            <a href="#" data-brand="ferrari" class="card shadow brand-filter justify-content-center align-items-center text-center">
+                <div class="card-body">
+                    <img src="../../img/ferarrilogo.png" class="card-img-top partner-logo" alt="...">
+                </div>
+            </a>
+        </div>
     </div>
 
     <hr style="border: 2px solid black;">
@@ -147,25 +197,53 @@
                     $result = mysqli_query($connection, $query);
                     if ($result && mysqli_num_rows($result) > 0):
                         foreach ($result as $car):
+                            // Map brand to logo filename
+                            $brand = strtolower($car['merek_mobil']);
+                            $brandLogo = '';
+                            switch ($brand) {
+                                case 'lamborghini':
+                                    $brandLogo = '../../img/lambologo.png';
+                                    break;
+                                case 'bmw':
+                                    $brandLogo = '../../img/bmwlogo.png';
+                                    break;
+                                case 'mercedes':
+                                case 'mercedez':
+                                    $brandLogo = '../../img/merchedeslogo.png';
+                                    break;
+                                case 'porsche':
+                                    $brandLogo = '../../img/porschelogo.png';
+                                    break;
+                                case 'ferrari':
+                                    $brandLogo = '../../img/ferarrilogo.png';
+                                    break;
+                                default:
+                                    $brandLogo = '';
+                            }
                     ?>
-                        <div class="col-6 col-md-4 col-lg-3 car-card"
-                            data-brand="<?= htmlspecialchars(strtolower($car['merek_mobil'])) ?>"
-                            data-type="<?= htmlspecialchars(strtolower($car['tipe_mobil'])) ?>"
-                            data-name="<?= htmlspecialchars(strtolower($car['nama_mobil'])) ?>">
-                            <a href="detailmobil.php?id=<?= $car['id_mobil'] ?>" style="text-decoration: none; color: inherit;">
-                                <div class="card shadow h-100">
-                                    <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" class="card-img-top" alt="<?= htmlspecialchars($car['nama_mobil']) ?>" style="height: 200px; object-fit: cover;">
-                                    <div class="card-footer d-flex align-items-center">
-                                        <span class="me-2"><?= htmlspecialchars(ucfirst($car['merek_mobil'])) ?></span>
-                                        <h6 class="mb-0"><b><?= htmlspecialchars($car['nama_mobil']) ?></b></h6>
+                            <div class="col-6 col-md-4 col-lg-3 car-card"
+                                data-brand="<?= htmlspecialchars($brand) ?>"
+                                data-type="<?= htmlspecialchars(strtolower($car['tipe_mobil'])) ?>"
+                                data-name="<?= htmlspecialchars(strtolower($car['nama_mobil'])) ?>">
+                                <a href="detailmobil.php?id=<?= $car['id_mobil'] ?>" style="text-decoration: none; color: inherit;">
+                                    <div class="card shadow h-100">
+                                        <img src="../../<?= htmlspecialchars($car['gambar_mobil_overview']) ?>" class="card-img-top" alt="<?= htmlspecialchars($car['nama_mobil']) ?>" style="height: 200px; object-fit: cover;">
+                                        <div class="card-footer d-flex align-items-center">
+                                            <?php if ($brandLogo): ?>
+                                                <img src="<?= $brandLogo ?>" alt="<?= htmlspecialchars($car['merek_mobil']) ?>" style="height:22px; width:auto; margin-right:8px;">
+                                            <?php endif; ?>
+                                            <!-- <span class="me-2">
+                                                <?= htmlspecialchars(ucfirst($car['merek_mobil'])) ?>
+                                            </span> -->
+                                            <h6 class="mb-0"><b><?= htmlspecialchars($car['nama_mobil']) ?></b></h6>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    <?php
+                                </a>
+                            </div>
+                        <?php
                         endforeach;
                     else:
-                    ?>
+                        ?>
                         <div class="col-12">
                             <div class="alert alert-warning text-center">No cars available.</div>
                         </div>

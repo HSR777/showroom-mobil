@@ -30,7 +30,7 @@ if ($id > 0) {
 
     <?php if ($car): ?>
     <!-- Hero Section Start -->
-    <section class="container-fluid p-0 position-relative" style="height: 60vh; background: url('../../<?= htmlspecialchars($car['gambar_mobil']) ?>') no-repeat center center; background-size: cover;">
+    <section class="container-fluid p-0 position-relative" style="height: 100vh; background: url('../../<?= htmlspecialchars($car['gambar_mobil']) ?>') no-repeat center center; background-size: cover;">
         <div class="container h-100">
             <div class="row h-100">
                 <!-- Kolom kiri: teks + tombol -->

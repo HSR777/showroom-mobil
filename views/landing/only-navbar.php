@@ -93,7 +93,7 @@
                     <a class="nav-link" href="about.php">About Us</a>
                 </li>
             </ul>
-            <a href="collection.php" class="btn rounded-pill fw-semibold" type="button" style="background: linear-gradient(to right, #3775F1, #20438B); color: white; border: none; font-family: Poppins">Explore Our Models</a>
+            <a href="collection.php" class="btn rounded-pill fw-semibold" type="button" style="background: linear-gradient(to right, #3775F1, #20438B); color: white; border: none; font-family: Poppins">Explore Our Collections</a>
         </div>
     </div>
 </nav>
