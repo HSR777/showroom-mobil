@@ -25,161 +25,178 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
         <!-- Wrapper start -->
         <div class="wrapper-content col-10 container-fluid ps-5">
-            <div class="row">
+            <div class="row gap-3">
                 <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <b>Manajemen Booking</b>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Nama Pemesan</th>
-                                            <th scope="col">Tanggal Booking</th>
-                                            <th scope="col">Waktu Booking</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    require_once('../../connections/koneksi.php');
-                                    $q = mysqli_query($connection, "
-                                        SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
-                                        FROM tr_pembelian_mobil_tbl t
-                                        JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
-                                        JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
-                                        ORDER BY t.created_at DESC
-                                    ");
-                                    $no = 1;
-                                    $modals = [];
-                                    while ($row = mysqli_fetch_assoc($q)) {
-                                        $nama = htmlspecialchars($row['nama_depan_calon_buyer'].' '.$row['nama_belakang_calon_buyer']);
-                                        $tanggal = htmlspecialchars($row['tanggal_jam_janjian']);
-                                        $waktu = date('H:i', strtotime($row['tanggal_jam_janjian']));
-                                        $status = htmlspecialchars($row['status_transaksi']);
-                                        $id_transaksi = $row['id_transaksi'];
-                                        ?>
-                                        <tr>
-                                            <td><?= $no ?></td>
-                                            <td><?= $nama ?></td>
-                                            <td><?= $tanggal ?></td>
-                                            <td><?= $waktu ?></td>
-                                            <td><?= $status ?></td>
-                                            <td>
-                                                <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal<?= $id_transaksi ?>">Detail</button>
-                                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusModal<?= $id_transaksi ?>">Update Status</button>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                        $modals[] = [
-                                            'id' => $id_transaksi,
-                                            'data' => [
-                                                'Nama Pemesan' => $nama,
-                                                'Email' => htmlspecialchars($row['email_calon_buyer']),
-                                                'No Telepon' => htmlspecialchars($row['nomor_telepon_calon_buyer']),
-                                                'Mobil' => htmlspecialchars($row['nama_mobil']),
-                                                'Tanggal Booking' => $tanggal,
-                                                'Waktu Booking' => $waktu,
-                                                'Status' => $status,
-                                                'Harga Deal' => 'Rp. ' . number_format($row['harga_deal'], 0, ',', '.'),
-                                                'Tanggal Transaksi' => htmlspecialchars($row['tanggal_transaksi']),
-                                            ],
-                                            'status' => $status
-                                        ];
-                                        $no++;
-                                    }
-                                    ?>
-                                    </tbody>
-                                </table>
-                                <!-- Render all modals after table -->
-                                <?php foreach ($modals as $modal): ?>
-                                <div class="modal fade" id="detailModal<?= $modal['id'] ?>" tabindex="-1" aria-labelledby="detailModalLabel<?= $modal['id'] ?>" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="detailModalLabel<?= $modal['id'] ?>">Detail Booking</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <ul class="list-group">
-                                          <?php foreach ($modal['data'] as $label => $value): ?>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                              <span><?= $label ?></span>
-                                              <span><?= $value ?></span>
-                                            </li>
-                                          <?php endforeach; ?>
-                                        </ul>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                      </div>
-                                    </div>
-                                  </div>
+
+                    <!-- card tabel 01 -->
+                    <div class="row mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <b>Manajemen Booking</b>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Nama Pemesan</th>
+                                                <th scope="col">Tanggal Booking</th>
+                                                <th scope="col">Waktu Booking</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            require_once('../../connections/koneksi.php');
+                                            $q = mysqli_query($connection, "
+                                            SELECT t.*, b.nama_depan_calon_buyer, b.nama_belakang_calon_buyer, b.email_calon_buyer, b.nomor_telepon_calon_buyer, m.nama_mobil
+                                            FROM tr_pembelian_mobil_tbl t
+                                            JOIN dm_calon_buyer_tbl b ON t.id_calon_buyer = b.id_calon_buyer
+                                            JOIN dm_mobil_tbl m ON t.id_mobil = m.id_mobil
+                                            ORDER BY t.created_at DESC
+                                        ");
+                                            $no = 1;
+                                            $modals = [];
+                                            while ($row = mysqli_fetch_assoc($q)) {
+                                                $nama = htmlspecialchars($row['nama_depan_calon_buyer'] . ' ' . $row['nama_belakang_calon_buyer']);
+                                                $tanggal = htmlspecialchars($row['tanggal_jam_janjian']);
+                                                $waktu = date('H:i', strtotime($row['tanggal_jam_janjian']));
+                                                $status = htmlspecialchars($row['status_transaksi']);
+                                                $id_transaksi = $row['id_transaksi'];
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no ?></td>
+                                                    <td><?= $nama ?></td>
+                                                    <td><?= $tanggal ?></td>
+                                                    <td><?= $waktu ?></td>
+                                                    <td><?= $status ?></td>
+                                                    <td>
+                                                        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal<?= $id_transaksi ?>">Detail</button>
+                                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusModal<?= $id_transaksi ?>">Update Status</button>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                $modals[] = [
+                                                    'id' => $id_transaksi,
+                                                    'data' => [
+                                                        'Nama Pemesan' => $nama,
+                                                        'Email' => htmlspecialchars($row['email_calon_buyer']),
+                                                        'No Telepon' => htmlspecialchars($row['nomor_telepon_calon_buyer']),
+                                                        'Mobil' => htmlspecialchars($row['nama_mobil']),
+                                                        'Tanggal Booking' => $tanggal,
+                                                        'Waktu Booking' => $waktu,
+                                                        'Status' => $status,
+                                                        'Harga Deal' => 'Rp. ' . number_format($row['harga_deal'], 0, ',', '.'),
+                                                        'Tanggal Transaksi' => htmlspecialchars($row['tanggal_transaksi']),
+                                                    ],
+                                                    'status' => $status
+                                                ];
+                                                $no++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                    <!-- Render all modals after table -->
+                                    <?php foreach ($modals as $modal): ?>
+                                        <div class="modal fade" id="detailModal<?= $modal['id'] ?>" tabindex="-1" aria-labelledby="detailModalLabel<?= $modal['id'] ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="detailModalLabel<?= $modal['id'] ?>">Detail Booking</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <ul class="list-group">
+                                                            <?php foreach ($modal['data'] as $label => $value): ?>
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    <span><?= $label ?></span>
+                                                                    <span><?= $value ?></span>
+                                                                </li>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal Update Status -->
+                                        <div class="modal fade" id="statusModal<?= $modal['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?= $modal['id'] ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <form method="post" action="../../logics/admin/crud-booking.php">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="statusModalLabel<?= $modal['id'] ?>">Update Status Booking</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="id_transaksi" value="<?= $modal['id'] ?>">
+                                                            <input type="hidden" name="buyer_email" value="<?= $modal['data']['Email'] ?>">
+                                                            <input type="hidden" name="buyer_name" value="<?= $modal['data']['Nama Pemesan'] ?>">
+                                                            <input type="hidden" name="mobil" value="<?= $modal['data']['Mobil'] ?>">
+                                                            <div class="mb-3">
+                                                                <label for="status_transaksi_<?= $modal['id'] ?>" class="form-label">Status</label>
+                                                                <select class="form-select" id="status_transaksi_<?= $modal['id'] ?>" name="status_transaksi" required>
+                                                                    <option value="pending" <?= $modal['status'] == 'pending' ? 'selected' : ''; ?>>Pending</option>
+                                                                    <option value="on-going" <?= $modal['status'] == 'on-going' ? 'selected' : ''; ?>>On-Going</option>
+                                                                    <option value="selesai" <?= $modal['status'] == 'selesai' ? 'selected' : ''; ?>>Selesai</option>
+                                                                    <option value="batal" <?= $modal['status'] == 'batal' ? 'selected' : ''; ?>>Batal</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="alert alert-info" id="info-ongoing-<?= $modal['id'] ?>" style="display:none;">
+                                                                Jika status diubah ke <b>on-going</b>, sistem akan mengirim email ke calon buyer.
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" name="update_status" class="btn btn-success">Simpan</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                var select = document.getElementById('status_transaksi_<?= $modal['id'] ?>');
+                                                var info = document.getElementById('info-ongoing-<?= $modal['id'] ?>');
+                                                if (select && info) {
+                                                    select.addEventListener('change', function() {
+                                                        if (this.value === 'on-going') {
+                                                            info.style.display = '';
+                                                        } else {
+                                                            info.style.display = 'none';
+                                                        }
+                                                    });
+                                                    // Initial state
+                                                    if (select.value === 'on-going') {
+                                                        info.style.display = '';
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                    <?php endforeach; ?>
                                 </div>
-                                <!-- Modal Update Status -->
-                                <div class="modal fade" id="statusModal<?= $modal['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?= $modal['id'] ?>" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                    <form method="post" action="../../logics/admin/crud-booking.php">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="statusModalLabel<?= $modal['id'] ?>">Update Status Booking</h5>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <input type="hidden" name="id_transaksi" value="<?= $modal['id'] ?>">
-                                          <input type="hidden" name="buyer_email" value="<?= $modal['data']['Email'] ?>">
-                                          <input type="hidden" name="buyer_name" value="<?= $modal['data']['Nama Pemesan'] ?>">
-                                          <input type="hidden" name="mobil" value="<?= $modal['data']['Mobil'] ?>">
-                                          <div class="mb-3">
-                                            <label for="status_transaksi_<?= $modal['id'] ?>" class="form-label">Status</label>
-                                            <select class="form-select" id="status_transaksi_<?= $modal['id'] ?>" name="status_transaksi" required>
-                                              <option value="pending" <?= $modal['status']=='pending'?'selected':''; ?>>Pending</option>
-                                              <option value="on-going" <?= $modal['status']=='on-going'?'selected':''; ?>>On-Going</option>
-                                              <option value="selesai" <?= $modal['status']=='selesai'?'selected':''; ?>>Selesai</option>
-                                              <option value="batal" <?= $modal['status']=='batal'?'selected':''; ?>>Batal</option>
-                                            </select>
-                                          </div>
-                                          <div class="alert alert-info" id="info-ongoing-<?= $modal['id'] ?>" style="display:none;">
-                                            Jika status diubah ke <b>on-going</b>, sistem akan mengirim email ke calon buyer.
-                                          </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="submit" name="update_status" class="btn btn-success">Simpan</button>
-                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        </div>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                                <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                  var select = document.getElementById('status_transaksi_<?= $modal['id'] ?>');
-                                  var info = document.getElementById('info-ongoing-<?= $modal['id'] ?>');
-                                  if (select && info) {
-                                    select.addEventListener('change', function() {
-                                      if (this.value === 'on-going') {
-                                        info.style.display = '';
-                                      } else {
-                                        info.style.display = 'none';
-                                      }
-                                    });
-                                    // Initial state
-                                    if (select.value === 'on-going') {
-                                      info.style.display = '';
-                                    }
-                                  }
-                                });
-                                </script>
-                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
+                    <!-- card tabel 01 end -->
+
+                    <!-- card tabel 02 -->
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <b>Tabel Test</b>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card tabel 02 end -->
                 </div>
                 <!-- card setting jadwal -->
                 <div class="col-auto card p-0">
@@ -251,12 +268,12 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    function handleSimpan(id) {
-        // Ganti dengan AJAX jika ingin update status tanpa reload
-        if(confirm('Tandai booking ini sebagai selesai?')) {
-            window.location.href = '../../logics/admin/crud-booking.php?action=simpan&id=' + id;
+        function handleSimpan(id) {
+            // Ganti dengan AJAX jika ingin update status tanpa reload
+            if (confirm('Tandai booking ini sebagai selesai?')) {
+                window.location.href = '../../logics/admin/crud-booking.php?action=simpan&id=' + id;
+            }
         }
-    }
     </script>
 </body>
 
