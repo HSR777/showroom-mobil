@@ -1,73 +1,74 @@
 <style>
     .navbar-nav .nav-link {
-            position: relative;
-            padding-bottom: 6px;
-            border-bottom: 2px solid transparent;
-            color: #fff !important;
-            transition: all 0.3s ease;
-        }
+        position: relative;
+        padding-bottom: 6px;
+        border-bottom: 2px solid transparent;
+        color: #fff !important;
+        transition: all 0.3s ease;
+    }
 
-   /* Ensure CSS is applied correctly */
-   body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+    /* Ensure CSS is applied correctly */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
 
-        /* .navbar {
+    /* .navbar {
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
         } */
 
 
-        /* Hover: garis bawah muncul */
-        .navbar-nav .nav-link:hover {
-            border-bottom: 2px solid #D4AF37;
-        }
+    /* Hover: garis bawah muncul */
+    .navbar-nav .nav-link:hover {
+        border-bottom: 2px solid #D4AF37;
+    }
 
-        /* Aktif: garis bawah tetap */
-        .navbar-nav .nav-link.active {
-            border-bottom: 2px solid #D4AF37;
-        }
+    /* Aktif: garis bawah tetap */
+    .navbar-nav .nav-link.active {
+        border-bottom: 2px solid #D4AF37;
+    }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
 
-        .feature-icon {
-            font-size: 2rem;
-            color: #D4AF37;
-        }
+    .feature-icon {
+        font-size: 2rem;
+        color: #D4AF37;
+    }
 
-        .feature {
-            background-color: #3775F1;
-        }
+    .feature {
+        background-color: #3775F1;
+    }
 
-        .partner-logo {
-            max-width: 5rem;
-            height: auto;
-            margin: 0 15px;
-        }
+    .partner-logo {
+        max-width: 5rem;
+        height: auto;
+        margin: 0 15px;
+    }
 
-        .schedule-section {
-            background-color: #f8f9fa;
-            padding: 60px 0;
-        }
-        .partner-logo {
-            max-width: 150px;
-            height: auto;
-            margin: 0 15px;
-            object-fit: cover;
-        }
+    .schedule-section {
+        background-color: #f8f9fa;
+        padding: 60px 0;
+    }
+
+    .partner-logo {
+        max-width: 150px;
+        height: auto;
+        margin: 0 15px;
+        object-fit: cover;
+    }
 </style>
 
 <?php

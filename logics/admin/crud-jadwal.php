@@ -2,7 +2,13 @@
 require_once('../../connections/koneksi.php');
 
 $days = [
-    'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'
+    'senin',
+    'selasa',
+    'rabu',
+    'kamis',
+    'jumat',
+    'sabtu',
+    'minggu'
 ];
 
 foreach ($days as $day) {

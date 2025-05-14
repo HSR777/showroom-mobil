@@ -194,9 +194,9 @@
                 <div class="col mx-2">
                     <img src="../../statics/images/landing/porsche.png" alt="porsche" class="partner-logo">
                 </div>
-                
-                </div>
+
             </div>
+        </div>
         </div>
     </section>
     <!-- end -->
@@ -244,7 +244,7 @@
                                 $hari = isset($hari_map[$row['hari_jadwal']]) ? $hari_map[$row['hari_jadwal']] : ucfirst($row['hari_jadwal']);
                                 echo "<tr>
                                     <td>{$hari}</td>
-                                    <td>" . htmlspecialchars(substr($row['jam_buka'],0,5)) . " - " . htmlspecialchars(substr($row['jam_tutup'],0,5)) . "</td>
+                                    <td>" . htmlspecialchars(substr($row['jam_buka'], 0, 5)) . " - " . htmlspecialchars(substr($row['jam_tutup'], 0, 5)) . "</td>
                                 </tr>";
                             }
                             ?>

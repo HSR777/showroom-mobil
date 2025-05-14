@@ -38,6 +38,7 @@
         margin-right: 0 !important;
         gap: 12px 0;
     }
+
     .brand-filter {
         width: 100%;
         min-width: 0;
@@ -48,6 +49,7 @@
         min-height: 200px;
         height: 100%;
     }
+
     .brand-filter .card-body {
         display: flex;
         align-items: center;
@@ -56,12 +58,14 @@
         min-height: 100px;
         /* Ensures all cards have the same height */
     }
+
     @media (min-width: 768px) {
         .brand-filter .card-body {
             height: 120px;
             min-height: 120px;
         }
     }
+
     /* Make brand filter images smaller */
     .brand-filter .partner-logo {
         max-height: 100px;
@@ -287,13 +291,13 @@
         // Helper: filter cars based on current filters
         function getFilteredCars() { // Returns filtered car cards based on current filters
             return carCards.filter(card => { // Filter each car card
-            const brand = card.getAttribute('data-brand'); // Get brand from data attribute
-            const type = card.getAttribute('data-type'); // Get type from data attribute
-            const name = card.getAttribute('data-name'); // Get name from data attribute
-            let brandMatch = (currentBrand === "all") || (brand === currentBrand); // Match brand or 'all'
-            let typeMatch = (currentType === "all") || (type === currentType); // Match type or 'all'
-            let searchMatch = (currentSearch === "") || (name.includes(currentSearch)); // Match search or empty
-            return brandMatch && typeMatch && searchMatch; // Return true if all match
+                const brand = card.getAttribute('data-brand'); // Get brand from data attribute
+                const type = card.getAttribute('data-type'); // Get type from data attribute
+                const name = card.getAttribute('data-name'); // Get name from data attribute
+                let brandMatch = (currentBrand === "all") || (brand === currentBrand); // Match brand or 'all'
+                let typeMatch = (currentType === "all") || (type === currentType); // Match type or 'all'
+                let searchMatch = (currentSearch === "") || (name.includes(currentSearch)); // Match search or empty
+                return brandMatch && typeMatch && searchMatch; // Return true if all match
             });
         }
 
@@ -302,7 +306,7 @@
             const filtered = getFilteredCars(); // Get filtered car cards
             carCards.forEach(card => card.style.display = "none"); // Hide all cards
             filtered.forEach((card, idx) => { // Show only cards for current page
-            card.style.display = (idx >= (currentPage - 1) * itemsPerPage && idx < currentPage * itemsPerPage) ? "block" : "none"; // Show if in page range
+                card.style.display = (idx >= (currentPage - 1) * itemsPerPage && idx < currentPage * itemsPerPage) ? "block" : "none"; // Show if in page range
             });
         }
 
@@ -317,27 +321,27 @@
             prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : ""); // Disable if on first page
             prevLi.innerHTML = `<a class="page-link rounded-circle" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`; // Set inner HTML
             prevLi.addEventListener("click", function(e) { // Add click event
-            e.preventDefault();
-            if (currentPage > 1) { // Go to previous page if not first
-                currentPage--;
-                updateVisibleCards();
-                renderPagination();
-            }
+                e.preventDefault();
+                if (currentPage > 1) { // Go to previous page if not first
+                    currentPage--;
+                    updateVisibleCards();
+                    renderPagination();
+                }
             });
             pagination.appendChild(prevLi); // Add to pagination
 
             // Page numbers
             for (let i = 1; i <= totalPages; i++) { // Loop through pages
-            const li = document.createElement("li"); // Create page number button
-            li.className = "page-item" + (i === currentPage ? " active" : ""); // Mark active page
-            li.innerHTML = `<a class="page-link rounded-circle hover-primary" href="#">${i}</a>`; // Set inner HTML
-            li.addEventListener("click", function(e) { // Add click event
-                e.preventDefault();
-                currentPage = i; // Set current page
-                updateVisibleCards();
-                renderPagination();
-            });
-            pagination.appendChild(li); // Add to pagination
+                const li = document.createElement("li"); // Create page number button
+                li.className = "page-item" + (i === currentPage ? " active" : ""); // Mark active page
+                li.innerHTML = `<a class="page-link rounded-circle hover-primary" href="#">${i}</a>`; // Set inner HTML
+                li.addEventListener("click", function(e) { // Add click event
+                    e.preventDefault();
+                    currentPage = i; // Set current page
+                    updateVisibleCards();
+                    renderPagination();
+                });
+                pagination.appendChild(li); // Add to pagination
             }
 
             // Next
@@ -345,12 +349,12 @@
             nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : ""); // Disable if on last page
             nextLi.innerHTML = `<a class="page-link rounded-circle" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`; // Set inner HTML
             nextLi.addEventListener("click", function(e) { // Add click event
-            e.preventDefault();
-            if (currentPage < totalPages) { // Go to next page if not last
-                currentPage++;
-                updateVisibleCards();
-                renderPagination();
-            }
+                e.preventDefault();
+                if (currentPage < totalPages) { // Go to next page if not last
+                    currentPage++;
+                    updateVisibleCards();
+                    renderPagination();
+                }
             });
             pagination.appendChild(nextLi); // Add to pagination
         }
@@ -360,23 +364,23 @@
         // Brand filter
         brandLinks.forEach(link => { // Brand filter event
             link.addEventListener('click', function(e) { // On brand filter click
-            e.preventDefault(); // Prevent default link
-            brandLinks.forEach(l => l.classList.remove('active')); // Remove active from all
-            this.classList.add('active'); // Add active to clicked
-            currentBrand = this.getAttribute('data-brand'); // Set current brand
-            currentPage = 1; // Reset to first page
-            updateVisibleCards(); // Update visible cards
-            renderPagination(); // Update pagination
+                e.preventDefault(); // Prevent default link
+                brandLinks.forEach(l => l.classList.remove('active')); // Remove active from all
+                this.classList.add('active'); // Add active to clicked
+                currentBrand = this.getAttribute('data-brand'); // Set current brand
+                currentPage = 1; // Reset to first page
+                updateVisibleCards(); // Update visible cards
+                renderPagination(); // Update pagination
             });
         });
 
         // Type filter
         typeRadios.forEach(radio => { // Type radio event
             radio.addEventListener('change', function() { // On type change
-            currentType = this.value; // Set current type
-            currentPage = 1; // Reset to first page
-            updateVisibleCards(); // Update visible cards
-            renderPagination(); // Update pagination
+                currentType = this.value; // Set current type
+                currentPage = 1; // Reset to first page
+                updateVisibleCards(); // Update visible cards
+                renderPagination(); // Update pagination
             });
         });
 
@@ -396,7 +400,6 @@
         updateVisibleCards(); // Initial card update
         renderPagination(); // Initial pagination
     </script>
-
 </body>
 
 </html>
