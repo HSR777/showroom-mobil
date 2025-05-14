@@ -6,6 +6,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $status = mysqli_real_escape_string($connection, $_POST['status_transaksi']);
     $q = mysqli_query($connection, "UPDATE tr_pembelian_mobil_tbl SET status_transaksi='$status', updated_at=NOW() WHERE id_transaksi=$id");
     if ($q) {
+        // Kirim email jika status on-going
+        if ($status === 'on-going' && !empty($_POST['buyer_email'])) {
+            $email = $_POST['buyer_email'];
+            $name = $_POST['buyer_name'];
+            $mobil = $_POST['mobil'];
+            include_once('mailer.php');
+            send_on_going_email($email, $name, $mobil);
+        }
         header("Location: ../../views/admin/manajemen-booking.php?status=sukses");
     } else {
         header("Location: ../../views/admin/manajemen-booking.php?status=gagal");

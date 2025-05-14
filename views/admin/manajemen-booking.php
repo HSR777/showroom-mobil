@@ -133,6 +133,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         </div>
                                         <div class="modal-body">
                                           <input type="hidden" name="id_transaksi" value="<?= $modal['id'] ?>">
+                                          <input type="hidden" name="buyer_email" value="<?= $modal['data']['Email'] ?>">
+                                          <input type="hidden" name="buyer_name" value="<?= $modal['data']['Nama Pemesan'] ?>">
+                                          <input type="hidden" name="mobil" value="<?= $modal['data']['Mobil'] ?>">
                                           <div class="mb-3">
                                             <label for="status_transaksi_<?= $modal['id'] ?>" class="form-label">Status</label>
                                             <select class="form-select" id="status_transaksi_<?= $modal['id'] ?>" name="status_transaksi" required>
@@ -141,6 +144,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                               <option value="selesai" <?= $modal['status']=='selesai'?'selected':''; ?>>Selesai</option>
                                               <option value="batal" <?= $modal['status']=='batal'?'selected':''; ?>>Batal</option>
                                             </select>
+                                          </div>
+                                          <div class="alert alert-info" id="info-ongoing-<?= $modal['id'] ?>" style="display:none;">
+                                            Jika status diubah ke <b>on-going</b>, sistem akan mengirim email ke calon buyer.
                                           </div>
                                         </div>
                                         <div class="modal-footer">
@@ -151,6 +157,25 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                     </form>
                                   </div>
                                 </div>
+                                <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                  var select = document.getElementById('status_transaksi_<?= $modal['id'] ?>');
+                                  var info = document.getElementById('info-ongoing-<?= $modal['id'] ?>');
+                                  if (select && info) {
+                                    select.addEventListener('change', function() {
+                                      if (this.value === 'on-going') {
+                                        info.style.display = '';
+                                      } else {
+                                        info.style.display = 'none';
+                                      }
+                                    });
+                                    // Initial state
+                                    if (select.value === 'on-going') {
+                                      info.style.display = '';
+                                    }
+                                  }
+                                });
+                                </script>
                                 <?php endforeach; ?>
                             </div>
                         </div>
