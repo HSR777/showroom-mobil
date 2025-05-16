@@ -42,8 +42,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                         <th scope="col">Nama Buyer</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">No Telepon</th>
-                                        <th scope="col">Alamat</th>
-                                        <th scope="col">Aksi</th>
+                                        <!-- <th scope="col">Alamat</th>
+                                        <th scope="col">Aksi</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,8 +57,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                             <td>".htmlspecialchars($row['nama_depan_calon_buyer'].' '.$row['nama_belakang_calon_buyer'])."</td>
                                             <td>".htmlspecialchars($row['email_calon_buyer'])."</td>
                                             <td>".htmlspecialchars($row['nomor_telepon_calon_buyer'])."</td>
-                                            <td>-</td>
-                                            <td>-</td>
+                                            
                                         </tr>";
                                         $no++;
                                     }
