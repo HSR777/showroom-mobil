@@ -44,9 +44,9 @@
                             We proudly serve a growing community of professionals, collectors, and automotive aficionados across Indonesia who value precision, prestige, and performance. Whether you're seeking timeless elegance or cutting-edge innovation, your journey begins here.
 
                             Nordique Autohaus — more than a drive, it's a destination.</p>
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- end -->
 
@@ -64,15 +64,15 @@
                     <div class="p-4">
                         <h2><b>Nordique Autohaus</b></h2>
                         <p>Jl. Monteluna Raya No.88</p>
-                            <p>Kawasan Elitaria Cipradama</p>
-                            <p>Monteluna District</p>
-                            <p>Jakarta Selatan 12450 Indonesia</p>  
-                            <p>Phone: +62 812-3456-7890</p>
-                            <p>Email: nordiqueautohaus@Gmail.com</p>   
+                        <p>Kawasan Elitaria Cipradama</p>
+                        <p>Monteluna District</p>
+                        <p>Jakarta Selatan 12450 Indonesia</p>
+                        <p>Phone: +62 812-3456-7890</p>
+                        <p>Email: nordiqueautohaus@Gmail.com</p>
                     </div>
                 </div>
                 <div class="col-md-6 p-0 mb-5">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97165.36403495252!2d-98.50039578022583!3d38.29543578629752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87a47fd32ee27c2f%3A0xe96ba45dfbaf95e5!2sPeters%20Landing%20Field!5e0!3m2!1sid!2sid!4v1746968950287!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97165.36403495252!2d-98.50039578022583!3d38.29543578629752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87a47fd32ee27c2f%3A0xe96ba45dfbaf95e5!2sPeters%20Landing%20Field!5e0!3m2!1sid!2sid!4v1746968950287!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -85,6 +85,7 @@
             <small>&copy; Nordique Autohaus 2025</small>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-
-
+</html>

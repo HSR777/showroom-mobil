@@ -1,0 +1,5 @@
+1. add floating button to add wa chat in index.php (landing page)
+2. change input nomor telepon with adding a select option phone number each region left side of the number
+3. add wa chat button inside detail modal in manajemen-booking.php
+4. add function update stok button in row table list mobil in manajemen-mobil.php
+
