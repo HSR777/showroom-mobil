@@ -38,11 +38,16 @@
         </li> -->
     </ul>
     <!-- Groub 01 End -->
-    <div class="mt-auto mb-3 text-center d-grid">
+    <div class="mt-auto mb-3 text-center">
         <hr>
-        <a href="../../logics/admin/logout.php" class="btn btn-outline-danger m-1" style="border-radius: 0;">
-            <i class="bi bi-box-arrow-right"></i> Logout
-        </a>
+        <div class="d-grid gap-2">
+            <a href="profile.php" class="btn btn-success w-100" style="border-radius: 0;">
+                <i class="bi bi-person-circle"></i> Profile
+            </a>
+            <a href="../../logics/admin/logout.php" class="btn btn-outline-danger w-100" style="border-radius: 0;">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+        </div>
     </div>
 </div>
 <!-- sidebar end -->
