@@ -1,3 +1,19 @@
+<?php
+// Fetch WhatsApp number from admin account before any HTML output
+require_once('../../connections/koneksi.php');
+$wa_number = '';
+$result = mysqli_query($connection, "SELECT nomor_telpon_akun FROM dm_akun_tbl WHERE id_akun = 1 LIMIT 1");
+if ($row = mysqli_fetch_assoc($result)) {
+    $wa_number = preg_replace('/\D/', '', $row['nomor_telpon_akun']);
+    if (substr($wa_number, 0, 1) === '0') {
+        $wa_number = '62' . substr($wa_number, 1);
+    }
+}
+// Fallback if not set or empty
+if (!$wa_number) {
+    $wa_number = '6289667041392';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -418,7 +434,7 @@
             </div>
         </div>
         <div class="wh-footer">
-            <a href="https://wa.me/6289667041392" target="_blank" class="wh-cta">
+            <a href="https://wa.me/<?= htmlspecialchars($wa_number) ?>" target="_blank" class="wh-cta">
                 <i class="bi bi-whatsapp me-2"></i>
                 Konsultasikan dengan Kami
             </a>
