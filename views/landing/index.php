@@ -71,6 +71,131 @@
             max-width: auto; */
             object-fit: cover;
         }
+
+        /* Floating WhatsApp button */
+        .wh-widget-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: #fff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        /* Panel hidden by default */
+        .wh-widget-panel {
+            position: fixed;
+            bottom: 90px;
+            /* tombol + margin */
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        /* Header */
+        .wh-header {
+            background: #04455a;
+            color: #fff;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wh-title {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .wh-close {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Body (chat messages) */
+        .wh-body {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .wh-msg {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 16px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .wh-msg-recv {
+            background: #fff;
+            align-self: flex-start;
+        }
+
+        .wh-msg-sent {
+            background: #dcf8c6;
+            align-self: flex-end;
+        }
+
+        .wave {
+            animation: wave 1.5s infinite;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: rotate(0deg)
+            }
+
+            50% {
+                transform: rotate(10deg)
+            }
+        }
+
+        /* Footer with CTA */
+        .wh-footer {
+            padding: 12px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .wh-cta {
+            display: inline-flex;
+            align-items: center;
+            background: #25D366;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .wh-powered {
+            font-size: 0.75rem;
+            color: #888;
+        }
     </style>
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -269,6 +394,40 @@
 
     <!-- end -->
 
+    <!-- whatsapp start -->
+    <!-- 1. Floating Button -->
+    <a href="#" class="wh-widget-toggle" id="wh-toggle">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- 2. Chat Panel -->
+    <div class="wh-widget-panel" id="wh-panel">
+        <div class="wh-header">
+            <div class="wh-title">
+                <i class="bi bi-person-circle me-2"></i>
+                Nordique Autohaus<br><small class="text-muted">Akun Bisnis</small>
+            </div>
+            <button class="wh-close" id="wh-close">&times;</button>
+        </div>
+        <div class="wh-body">
+            <div class="wh-msg wh-msg-recv">
+                Halo <span class="wave">👋</span>
+            </div>
+            <div class="wh-msg wh-msg-sent">
+                Hi, just visited your website. May I know more?
+            </div>
+        </div>
+        <div class="wh-footer">
+            <a href="https://wa.me/6289667041392" target="_blank" class="wh-cta">
+                <i class="bi bi-whatsapp me-2"></i>
+                Konsultasikan dengan Kami
+            </a>
+            <div class="wh-powered">⚡️ Powered by Dimas</div>
+        </div>
+    </div>
+
+
+
     <!-- footer -->
     <?php
     ?>
@@ -280,8 +439,22 @@
 
 
 
-
+    <!-- js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- js whatsapp -->
+    <script>
+        const toggleBtn = document.getElementById('wh-toggle');
+        const panel = document.getElementById('wh-panel');
+        const closeBtn = document.getElementById('wh-close');
+
+        toggleBtn.addEventListener('click', e => {
+            e.preventDefault();
+            panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
+        });
+        closeBtn.addEventListener('click', () => panel.style.display = 'none');
+    </script>
+
+
 </body>
 
 </html>
