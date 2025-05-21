@@ -94,6 +94,14 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                                         data-stok="<?= $car['stok_mobil'] ?>">
                                                         <i class="bi bi-pencil"></i> Edit
                                                     </a>
+                                                    <a href="#" class="btn btn-outline-info btn-add-stock"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#addStockModal"
+                                                        data-id="<?= $car['id_mobil'] ?>"
+                                                        data-nama="<?= htmlspecialchars($car['nama_mobil'], ENT_QUOTES) ?>"
+                                                        data-stok="<?= $car['stok_mobil'] ?>">
+                                                        <i class="bi bi-plus-circle"></i> Add New Stock
+                                                    </a>
                                                     <a href="#" class="btn btn-outline-danger btn-delete"
                                                         data-id="<?= $car['id_mobil'] ?>">
                                                         <i class="bi bi-trash"></i> Delete
@@ -119,6 +127,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 <!-- modal update car -->
                 <?php include('modal-update-mobil.php'); ?>
                 <!-- modal update car End-->
+                <!-- modal add new stock car -->
+                <?php include('modal-add-stok-mobil.php'); ?>
+                <!-- modal add new stock car end -->
             </div>
         </div>
         <!-- Wrapper End -->
@@ -153,6 +164,19 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 modal.find('#updateDeskripsiMobil').val(deskripsi);
                 modal.find('#updateCarPrice').val(harga);
                 modal.find('#updateStokMobil').val(stok);
+            });
+
+            // Populate add stock modal with car data
+            $('#addStockModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var nama = button.data('nama');
+                var stok = button.data('stok');
+
+                var modal = $(this);
+                modal.find('#addStock_mobil_id').val(id);
+                modal.find('#addStock_nama_mobil').val(nama);
+                modal.find('#addStock_stok_sebelumnya').val(stok);
             });
 
             // Delete button handler
