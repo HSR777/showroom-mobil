@@ -119,7 +119,7 @@ $connection->close();
                                     <option value="91">+91 (IN)</option>
                                     <!-- Add more as needed -->
                                 </select>
-                                <input type="text" class="form-control" id="newPhoneNumber" name="new_phone" placeholder="Enter new phone number" required>
+                                <input type="number" class="form-control" id="newPhoneNumber" name="new_phone" placeholder="85798442160" required>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Update</button>
