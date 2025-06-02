@@ -108,4 +108,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     }
     exit();
 }
+
+// add new stock to car
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'addStock') {
+    $id = (int)$_POST['mobil_id'];
+    $stok_tambah = (int)$_POST['stok_mobil'];
+    // Get current stock
+    $result = mysqli_query($connection, "SELECT stok_mobil FROM dm_mobil_tbl WHERE id_mobil = $id");
+    if ($row = mysqli_fetch_assoc($result)) {
+        $stok_baru = $row['stok_mobil'] + $stok_tambah;
+        $update = mysqli_query($connection, "UPDATE dm_mobil_tbl SET stok_mobil = $stok_baru, tanggal_diperbaharui = NOW() WHERE id_mobil = $id");
+        if ($update) {
+            echo "<script>
+                alert('Stock successfully updated!');
+                window.location.href='../../views/admin/manajemen-mobil.php';
+            </script>";
+        } else {
+            echo "<script>
+                alert('Failed to update stock. Please try again.');
+                window.location.href='../../views/admin/manajemen-mobil.php';
+            </script>";
+        }
+    } else {
+        echo "<script>
+            alert('Car not found.');
+            window.location.href='../../views/admin/manajemen-mobil.php';
+        </script>";
+    }
+    exit();
+}
 ?>

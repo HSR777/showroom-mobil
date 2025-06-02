@@ -4,6 +4,31 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     header('Location: login.php');
     exit;
 }
+require_once '../../connections/koneksi.php';
+
+// Get total cars
+$total_cars = mysqli_fetch_row(mysqli_query($connection, "SELECT COUNT(*) FROM dm_mobil_tbl"))[0];
+
+// Get total cars per brand
+$brands = [
+    'lamborghini' => 'Lamborghini',
+    'mercedes'    => 'Mercedes',
+    'porsche'     => 'Porsche',
+    'ferrari'     => 'Ferrari',
+    'bmw'         => 'BMW'
+];
+$brand_counts = [];
+foreach ($brands as $key => $label) {
+    $brand_counts[$key] = mysqli_fetch_row(mysqli_query($connection, "SELECT COUNT(*) FROM dm_mobil_tbl WHERE merek_mobil='$key'"))[0];
+}
+
+$brand_images = [
+    'lamborghini' => '../../img/lambologo.png',
+    'mercedes'    => '../../img/merchedeslogo.png',
+    'porsche'     => '../../img/porschelogo.png',
+    'ferrari'     => '../../img/ferarrilogo.png',
+    'bmw'         => '../../img/bmwlogo.png'
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,61 +52,31 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
         <!-- Wrapper start -->
         <div class="wrapper-content col-10">
-            <nav>
-                test
-            </nav>
             <div class="container-fluid">
-                <!-- card counting start -->
+                <!-- Card Counting Start -->
                 <div class="row mb-4">
                     <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
+                        <div class="card shadow border-0 h-100 bg-primary text-white">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
                                 <i class="bi bi-car-front-fill fs-1 mb-2"></i>
-                                <h5 class="card-title">Total Mobil</h5>
-                                <p class="card-text">123</p>
+                                <h5 class="card-title">Total Cars</h5>
+                                <p class="display-5 fw-bold mb-0"><?= $total_cars ?></p>
                             </div>
                         </div>
                     </div>
+                    <?php foreach ($brands as $key => $label): ?>
                     <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-people-fill fs-1 mb-2"></i>
-                                <h5 class="card-title">Calon Buyer</h5>
-                                <p class="card-text">45</p>
+                        <div class="card shadow border-0 h-100 text-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                <img src="<?= $brand_images[$key] ?>" alt="<?= $label ?>" style="height:64px;width:auto; object-fit: cover;" class="mb-2">
+                                <h6 class="card-title mb-1"><?= $label ?></h6>
+                                <span class="fs-4 fw-semibold"><?= $brand_counts[$key] ?></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-cash-stack fs-1 mb-2"></i>
-                                <h5 class="card-title">Transaksi</h5>
-                                <p class="card-text">67</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-calendar-event-fill fs-1 mb-2"></i>
-                                <h5 class="card-title">Jadwal</h5>
-                                <p class="card-text">7</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="bi bi-graph-up-arrow fs-1 mb-2"></i>
-                                <h5 class="card-title">Statistik</h5>
-                                <p class="card-text">99</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- card counting end -->
+                <!-- Card Counting End -->
             </div>
         </div>
         <!-- Wrapper End -->
