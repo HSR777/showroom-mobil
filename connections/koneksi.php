@@ -9,8 +9,8 @@ $database = 'overhaul_showroom'; // Database name
 $connection = mysqli_connect($host, $user, $password, $database);
 
 // Check connection
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
+if (!$connection) { // Check if connection failed
+    die("Connection failed: " . mysqli_connect_error()); // Output error and stop script
 }
 
 // echo "Connected successfully";
